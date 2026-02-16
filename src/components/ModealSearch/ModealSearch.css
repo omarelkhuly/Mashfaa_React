@@ -1,0 +1,31 @@
+.onclinkSearch{
+    background: none !important;
+    border: none !important;
+    width: auto !important;
+}
+
+.color_icon{
+    color: white;
+}
+
+.modal-dialog {
+    max-width: none !important;
+    height: 500px;
+    margin-left: 20px !important;
+}
+
+.modal-content{
+    position: absolute;
+    top: 10%;
+    height: 100%;
+}
+
+.formSeasrch{
+    width: 100%;
+    height: 200px;
+    justify-content: center;
+}
+
+input.form-control {
+    height: 50px;
+}

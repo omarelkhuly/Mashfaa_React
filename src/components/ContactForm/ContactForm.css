@@ -1,0 +1,91 @@
+/* تنسيق نموذج الاتصال */
+section#contact-section h3{
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;
+}
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 6px 1.5px var(--color-heavy);
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--main-color);
+    transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-heavy);
+    outline: none;
+}
+
+.contact-form textarea {
+    height: 150px;
+    resize: none;
+}
+
+.submit_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 40px;
+    background-color: var(--color-heavy);
+    color: #fff;
+    border: none;
+    border-radius: 8px !important;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.submit_button:hover {
+    background-color: var(--hover-btn-color);
+}
+
+.success-message {
+    position: fixed;
+    top: 0;
+    background-color: var(--border-color);
+    z-index: 3000;
+    width: 30%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 8px;
+    opacity: 0.7;
+    font-size: 26px;
+    font-weight: 700;
+}
+@media screen and (max-width:770px) and (min-width:230px){
+    .success-message {
+        width: 100%;
+        top: 5px;
+    }
+}

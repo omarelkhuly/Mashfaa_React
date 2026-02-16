@@ -1,0 +1,127 @@
+.team-member {
+    background-color: #fff;
+    border: 2px solid rgba(86, 90, 207, .2);
+    border-radius: 20px;
+    padding: 35px 40px 50px;
+    position: relative;
+    text-align: center;
+    transition: all .5s;
+    z-index: 1;
+}
+
+.team-member .team-media {
+    margin-bottom: 20px;
+    padding: 20%;
+    position: relative;
+}
+
+.team-member .team-media img {
+    width: 100%;
+    height: auto;
+    -webkit-mask-image: url(../../assets/bgImgDo.png);
+    mask-image: url(../../assets/bgImgDo.png);
+    -webkit-mask-position: center center;
+    mask-position: center center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
+    mask-size: 100%;
+}
+
+.team-member .team-media:after,
+.team-member .team-media:before {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    content: "";
+    height: 100%;
+    left: 50%;
+    opacity: .2;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: all .5s;
+    width: 100%;
+    z-index: -1;
+}
+
+.team-member .team-media:before {
+    background-image: url(../../assets/beforeImgForDo.png);
+    background-size: 77%;
+}
+
+.team-member .team-media::after {
+    background-image: url(../../assets/afterImgForDo.png);
+    background-size: 100%;
+}
+
+.team-info .title a{
+    color: var(--main-color);
+}
+
+.textDo {
+    color: var(--main-color);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.spanDo,
+.title-ext{
+    color: var(--green-color) !important;
+}   
+
+.title-ext{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.spanDo {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.team-member .social-media {
+    display: flex;
+    justify-content: center;
+    margin: 0 -6px;
+}
+
+.team-member .social-media li {
+    display: inline-block;
+    padding: 0 6px;
+}
+
+.team-member .social-media li a {
+    background-color: var(--green-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px 0 rgba(31, 34, 120, .1);
+    display: block;
+    height: 40px;
+    line-height: 42px;
+    text-align: center;
+    transition: all .5s;
+    width: 40px;
+}
+
+.team-member .social-media li a svg{
+    color: #fff !important;
+}
+
+.social-media li a:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+.team-member.active,
+.team-member:hover {
+    border-color: #fff;
+    box-shadow: 0 10px 50px 0 rgba(0, 2, 72, .1);
+    z-index: 9;
+}
+
+.team-member.active .team-media:after,
+.team-member.active .team-media:before,
+.team-member:hover .team-media:after,
+.team-member:hover .team-media:before {
+    opacity: 1;
+}

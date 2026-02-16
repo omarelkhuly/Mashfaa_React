@@ -1,0 +1,183 @@
+/* src/index.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tajawal", sans-serif !important;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.tajawal_extralight {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.tajawal_light {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.tajawal_regular {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tajawal_medium {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.tajawal_bold {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.tajawal_extrabold {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.tajawal_black {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --main-color: #004444;
+  --btn-color: #006262;
+  --color-heavy: #008d8d;
+  --hover-btn-color: #008D8D;
+  --border-color: #017a7a;
+  --green-color: #005656;
+}
+
+.btn {
+  background-color: var(--green-color) !important;
+  color: white !important;
+}
+
+.btn:hover {
+  background-color: var(--hover-btn-color) !important;
+}
+
+section,
+footer,
+header {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  max-width: 100%;
+  padding: 25px 0px;
+  margin-top: 50px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+span {
+  display: block;
+}
+
+ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+li {
+  list-style-type: none;
+}
+
+button {
+  text-align: center;
+  box-sizing: border-box;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+  background: none;
+}
+
+p {
+  line-height: 20px;
+}
+
+input {
+  box-sizing: border-box;
+  border: 1px solid white;
+  text-align: left;
+  padding: 5px 15px;
+  color: #333;
+  font-size: 17px;
+}
+
+.input-group select {
+  width: 100%;
+  height: 45px;
+  border: none;
+}
+
+.input-group select:focus {
+  border: none;
+}
+
+/* RTL Support */
+html[dir="rtl"] .input-group input,
+html[dir="rtl"] .input-group select {
+  text-align: right;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select {
+  text-align: right;
+}
+
+html[dir="rtl"] .input-icon {
+  right: 0;
+  left: auto;
+}
+
+html[dir="rtl"] .input-group input,
+html[dir="rtl"] .input-group select {
+  padding: 12px 25px 12px 0;
+}
+
+/* ==============================
+   Dropdowns RTL support
+============================== */
+html[dir="rtl"] .custom-dropdown .dropdown-toggle {
+  text-align: right;
+  /* محاذاة النص لليمين */
+  padding-right: 20px;
+  /* مسافة داخلية من اليمين */
+  padding-left: 15px;
+  /* مسافة داخلية من اليسار */
+}
+
+html[dir="rtl"] .custom-dropdown .dropdown-toggle::after {
+  right: auto;
+  left: 20px;
+  /* حرك السهم للجهة اليسرى */
+  transform: translateY(-50%) rotate(180deg);
+  /* عكس السهم */
+}
+
+html[dir="rtl"] .custom-dropdown .dropdown-menu.show {
+  text-align: right;
+  /* محاذاة عناصر القائمة لليمين */
+}
+
+.section-sp1 {
+  padding-top: 100px;
+  padding-bottom: 70px;
+}

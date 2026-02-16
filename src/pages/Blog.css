@@ -1,0 +1,157 @@
+.blog_card {
+    border: 2px solid rgba(86, 90, 207, 0.2);
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.blog_card .post_media {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.blog_card .post_media img {
+    width: 100%;
+    border-style: none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.blog_card .post_info {
+    padding: 12px;
+}
+
+.post_meta {
+    align-items: center;
+    margin-bottom: 15px !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post_meta li {
+    display: flex;
+    position: relative;
+    font-size: 14px;
+    margin-right: 20px;
+    color: var(--main-color);
+    line-height: 1;
+    align-items: center;
+    cursor: pointer;
+}
+
+.post_meta li:last-child {
+    margin-right: 0;
+}
+
+.post_meta li.author a {
+    display: flex;
+    align-items: center;
+    color: var(--color-heavy);
+}
+
+.post_meta li img {
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.post_meta li svg {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.blog_card .post-title {
+    margin-bottom: 25px;
+    color: var(--main-color);
+}
+
+.blog_card .post-title a {
+    color: var(--color-heavy);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.outline_primary {
+    width: 170px;
+    height: 50px;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 18px !important;
+    background-color: white !important;
+    border: var(--color-heavy) solid 1px;
+    border-radius: 8px !important;
+    color: var(--color-heavy) !important;
+    transition: 0.5s; 
+}
+
+.outline_primary:hover {
+    background-color: var(--hover-btn-color) !important;
+    border: #ffffff solid 1px !important;
+    color:  white !important;
+}
+
+.outline_primary svg {
+    background-color: var(--main-color);
+    color: white;
+    padding: 3%;
+}
+
+.pagination-bx .pagination {
+    padding: 10px 0;
+    display: block;
+    margin: 0;
+    width: 100%;
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    background-color: #fff;
+    color: #565acf;
+    padding: 12px 15px;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 40px;
+    line-height: 1;
+    display: block;
+    border-radius: 8px !important;
+    border: 2px solid rgba(86, 90, 207, 0.2);
+    -webkit-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    border-color: transparent;
+}
+
+.pagination li.active a {
+    background-color: #565acf;
+    color: #fff;
+}
+
+.pagination>li.active>a:hover,
+.pagination>li>a:hover,
+.pagination>li>span:hover {
+    color: #fff !important;
+    background-color: #565acf;
+}

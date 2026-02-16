@@ -1,0 +1,52 @@
+.error-404 .inner-content {
+    margin: auto;
+    max-width: 550px;
+    text-align: center;
+}
+
+.error-404 .error-title {
+    font-size: 220px;
+    font-weight: 700;
+    line-height: 180px;
+    margin-bottom: 15px;
+    color: #1f2278;
+}
+
+.error-404 .error-text {
+    font-weight: 700;
+    color: #1f2278;
+    margin-bottom: 15px;
+}
+
+.error-404 .error-pra {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.error-404 .error-title span {
+    background-image: url(../assets/img_inemation16.gif);
+    background-size: 100%;
+    display: inline-block;
+    height: 145px;
+    margin: 0 10px;
+    width: 145px;
+}
+
+.clearfix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnprimary {
+    width: 150px;
+    height: 50px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_one{
+    margin-right: 10px;
+    width: 80px !important;
+}

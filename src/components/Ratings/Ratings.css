@@ -1,0 +1,48 @@
+.feature-bx3 {
+    background-color: #fff;
+    border-radius: 20px;
+    margin: 15px 0 0 15px;
+    padding: 50px 30px;
+    position: relative;
+    transition: all .5s;
+}
+
+.feature-bx3:after {
+    border: 2px solid var(--green-color);
+    border-radius: 20px;
+    content: "";
+    height: 100%;
+    left: -15px;
+    position: absolute;
+    top: -15px;
+    width: 100%;
+    z-index: -1;
+}
+
+.feature-bx3:hover {
+    background-color: var( --hover-btn-color);
+}
+
+.feature-bx3 .counter,
+.feature-bx3 .ttr-title,
+.feature-bx3 p {
+    transition: all .5s;
+}
+
+.feature-bx3 .counter {
+    color: var(--green-color) !important;
+    font-size: 60px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.feature-bx3 p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.feature-bx3:hover .counter,
+.feature-bx3:hover .ttr-title,
+.feature-bx3:hover p {
+    color: #fff !important;
+}
