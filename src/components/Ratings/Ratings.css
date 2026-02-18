@@ -8,7 +8,7 @@
 }
 
 .feature-bx3:after {
-    border: 2px solid var(--green-color);
+    border: 2px solid var(--color-green);
     border-radius: 20px;
     content: "";
     height: 100%;
@@ -30,7 +30,7 @@
 }
 
 .feature-bx3 .counter {
-    color: var(--green-color) !important;
+    color: var(--color-green) !important;
     font-size: 60px;
     line-height: 1;
     margin-bottom: 10px;

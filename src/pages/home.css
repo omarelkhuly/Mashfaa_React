@@ -15,12 +15,12 @@ header .row .height_col {
 }
 
 header .row h5 {
-    color: var(--color-heavy);
+    color: var(--light-color);
     font-weight: 900;
 }
 
 header .row h2 {
-    color: var(--color-heavy);
+    color: var(--light-color);
     font-weight: 900;
     font-size: 50px;
 }
@@ -29,7 +29,7 @@ header .row button {
     color: white !important;
     border: none;
     outline: none;
-    background-color: var(--green-color);
+    background-color: var(--color-green);
     width: 170px;
     height: 70px;
     border-radius: 8px;
@@ -84,44 +84,20 @@ header .row .img_bg_one .imgOne {
     position: relative;
     z-index: 2;
 }
-
+/* 
 .subscriber {
     position: absolute;
     top: 0;
-    z-index: -5;
+    z-index: 2;
+    opacity: 0.3;
     animation: mover 2s infinite alternate;
-}
+} */
 
 .contact_bg_section .contact-form{
     box-shadow: none;
     background: none;
     position: relative;
     z-index: 5;
-}
-
-img.img_inm1 {
-    right: 15%;
-    top: 15%;
-}
-
-img.img_inm2 {
-    left: 11%;
-    top: 70%;
-}
-
-img.img_inm3 {
-    left: 20%;
-    top: 20%;
-}
-
-img.img_inm4 {
-    right: 40%;
-    top: 70%;
-}
-
-img.img_inm5 {
-    right: 40%;
-    top: 26%;
 }
 
 @keyframes mover {
@@ -674,9 +650,9 @@ span.icon-cell {
         font-size: 25px;
     }
 
-    .subscriber {
+    /* .subscriber {
         display: none;
-    }
+    } */
 
     header .row button {
         width: 140px;

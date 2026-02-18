@@ -80,7 +80,7 @@ const ContainerNav = ({ serviceType, blogType }) => {
           <button className="mobile_icon" onClick={isLoggedIn ? handleLogout : () => navigate("/Login")}>
             <FontAwesomeIcon icon={isLoggedIn ? faRightFromBracket : faUser} />
           </button>
-        </div>  
+        </div>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <div className="menu-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,6 @@ const ContainerNav = ({ serviceType, blogType }) => {
               <NavDropdown.Item as={Link} to="/About">{t("about")}</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/Team">{t("team")}</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/FAQ">FAQ</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/Reservation">{t("booking")}</NavDropdown.Item>
             </NavDropdown>
 
             {/* SERVICES */}
@@ -103,6 +102,9 @@ const ContainerNav = ({ serviceType, blogType }) => {
               <NavDropdown.Item as={Link} to="/Services">{t("services")}</NavDropdown.Item>
               <NavDropdown.Item as={Link} to={`/servicesDetails/${serviceType || 'default'}`}>{t("services")} Details</NavDropdown.Item>
             </NavDropdown>
+
+            {/* booking */}
+            <Link to="/Reservation" className="nav-link">{t("booking")}</Link>
 
             {/* BLOGS */}
             <NavDropdown title={t("blogs")} show={showBlog} onMouseEnter={() => setShowBlog(true)} onMouseLeave={() => setShowBlog(false)}>

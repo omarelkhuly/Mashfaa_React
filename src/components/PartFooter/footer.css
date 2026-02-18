@@ -1,3 +1,31 @@
+/* ===== Footer Background ===== */
+.footer-area {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 80px 0 40px;
+    color: #fff;
+    z-index: 1;
+}
+
+/* ===== Overlay احترافي ===== */
+.footer-area::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(0, 68, 68, 0.92),
+            rgba(0, 0, 0, 0.85));
+    z-index: -1;
+}
+
+/* خلي المحتوى فوق الـ overlay */
+.footer-area .container {
+    position: relative;
+    z-index: 2;
+}
+
 .a_footer_dis {
     color: #444 !important;
     display: block;
@@ -25,7 +53,7 @@
     color: var(--color-heavy);
 }
 
-.footer_title::after {
+/* .footer_title::after {
     background-image: url(../../assets/img_inemation15.png);
     background-repeat: no-repeat;
     bottom: 0;
@@ -34,7 +62,7 @@
     left: 0;
     position: absolute;
     width: 85px;
-}
+} */
 
 .footer_logo {
     margin-bottom: 25px;
@@ -114,7 +142,7 @@
 .footer_widget .btn {
     margin-bottom: 3%;
     border-radius: 2.5px;
-    background-color: var(--green-color);
+    background-color: var(--color-green);
 }
 
 /* الحاوية */

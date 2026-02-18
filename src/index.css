@@ -59,11 +59,12 @@ html {
   --color-heavy: #008d8d;
   --hover-btn-color: #008D8D;
   --border-color: #017a7a;
-  --green-color: #005656;
+  --color-green: #005656;
+  --light-color: #53e9e9;
 }
 
 .btn {
-  background-color: var(--green-color) !important;
+  background-color: var(--color-green) !important;
   color: white !important;
 }
 

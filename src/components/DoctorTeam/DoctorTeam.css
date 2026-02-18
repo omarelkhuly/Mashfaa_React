@@ -67,7 +67,7 @@
 
 .spanDo,
 .title-ext{
-    color: var(--green-color) !important;
+    color: var(--color-green) !important;
 }   
 
 .title-ext{
@@ -92,7 +92,7 @@
 }
 
 .team-member .social-media li a {
-    background-color: var(--green-color);
+    background-color: var(--color-green);
     border-radius: 8px;
     box-shadow: 0 10px 40px 0 rgba(31, 34, 120, .1);
     display: block;

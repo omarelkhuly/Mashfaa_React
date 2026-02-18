@@ -44,7 +44,7 @@
 .about-thumb-area .exp-bx {
     background-color: #e6e7ff;
     border-radius: 60px 60px 0 60px;
-    color: var(--green-color);
+    color: var(--color-green);
     display: block;
     font-size: 120px;
     font-weight: 800;
@@ -75,7 +75,7 @@
 }
 
 .about-thumb-area:after {
-    background-color: var(--green-color);
+    background-color: var(--color-green);
     border-radius: 15px;
     content: "";
     height: 50px;
@@ -110,7 +110,7 @@
 }
 
 .text_secondary{
-    color: var(--green-color) !important;
+    color: var(--color-green) !important;
     font-size: 20px;
     font-weight: 800;
 }
@@ -145,12 +145,17 @@
     margin-right: 30px;
 }
 
+html[dir="rtl"] .feature-bx1 .icon-cell {
+    margin-right: 0;
+    margin-left: 30px;
+}
+
 .icon-content {
     overflow: hidden;
 }
 
 .feature-bx1 .icon-content .ttr-title {
-    color: var(--green-color);
+    color: var(--color-green);
     font-size: 16px;
     font-weight: 600;
     margin: 0;

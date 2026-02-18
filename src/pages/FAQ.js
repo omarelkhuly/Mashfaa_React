@@ -1,14 +1,19 @@
-// FAQ.js
+// src/pages/FAQ.js
 import React, { useEffect, useState } from "react";
 import Banner from "../components/Banner/Banner";
 import { getFaqApi } from "../api/faq";
 import { faqStatic } from "../Data/faqStatic";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import backgroundFaq from '../assets/backgrond_FAQ.jpg';
+import "./FAQ.css";
 
 const FAQ = () => {
   const { t, i18n } = useTranslation();
   const [faq, setFaq] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const isLoggedIn = !!localStorage.getItem("token");
   const lang = i18n.language;
@@ -23,9 +28,8 @@ const FAQ = () => {
           setFaq(faqStatic[lang]);
         }
       } catch (error) {
-        console.error(error);
         setFaq(faqStatic[lang]);
-      } finally {   
+      } finally {
         setLoading(false);
       }
     };
@@ -33,31 +37,60 @@ const FAQ = () => {
     loadFaq();
   }, [isLoggedIn, lang]);
 
+  const toggleFAQ = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <>
       <Banner />
 
-      <section className="section-area section-sp2">
-        <div className="container">
+      <section className="section-area section-sp2 faq-section"
+        style={{
+          backgroundImage: `url(${backgroundFaq})`
+        }}
+      >
+        <div className="faq-overlay">
+          <div className="container">
 
-          <h2 className="mb-4">{t("faq")}</h2>
+            <h2 className="mb-4">{t("faq")}</h2>
 
-          {loading && <p>{t("loading")}</p>}
+            {loading && <p>{t("loading")}</p>}
 
-          {!loading && faq.length === 0 && (
-            <p>{t("noFaq")}</p>
-          )}
+            {!loading &&
+              faq.map((item, index) => (
+                <div
+                  key={index}
+                  className={`faq-item ${activeIndex === index ? "active" : ""}`}
+                >
+                  <div
+                    className="faq-question"
+                    onClick={() => toggleFAQ(index)}
+                  >
+                    <h5>{item.question}</h5>
 
-          {!loading &&
-            faq.map((item, index) => (
-              <div key={index} className="mb-4">
-                <h5>{item.question}</h5>
-                <p>{item.answer}</p>
-              </div>
-            ))}
+                    <span
+                      className={`faq-icon ${activeIndex === index ? "rotate" : ""
+                        }`}
+                    >
+                      <FontAwesomeIcon icon={faPlus} />
+                    </span>
+                  </div>
 
+                  <div
+                    className={`faq-answer ${activeIndex === index ? "show" : ""
+                      }`}
+                  >
+                    <div className="faq-content">
+                      <p>{item.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+          </div>
         </div>
-      </section>
+      </section >
     </>
   );
 };

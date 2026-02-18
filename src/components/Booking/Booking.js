@@ -5,12 +5,14 @@ import { departments, doctors } from "../../Data/DataBooks";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-// import backgroundAppointment from "../../assets/backgrond_appointment.jpg";
+import backgrondBooking from "../../assets/backgrounnd_booking.jpg";
 import "./Appointment.css";
 
 const Booking = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const isRTL = i18n.language === "ar";
 
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState("");
@@ -19,7 +21,6 @@ const Booking = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", date: "" });
   const [errors, setErrors] = useState({ name: "", phone: "" });
 
-  // جلب بيانات المدن من API
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -66,132 +67,122 @@ const Booking = () => {
   return (
     <section
       className="section_book"
+      style={{ backgroundImage: `url(${backgrondBooking})` }}
     >
-      {/* Overlay */}
       <div className="overlay"></div>
 
       <div className="container">
         <form onSubmit={handleSubmit}>
-          <div className="form-group custom-dropdown">
-            <Dropdown onSelect={(e) => setSelectedDepartment(e)}>
-              <Dropdown.Toggle variant="light" id="dropdown-department">
-                {selectedDepartment || t("selectDepartment")}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item disabled>
-                  {selectedDepartment
-                    ? t("changeDepartment")
-                    : t("selectDepartment")}
-                </Dropdown.Item>
-                {departments.map((dept) => (
-                  <Dropdown.Item key={dept.id} eventKey={dept.name}>
-                    {dept.name}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
+          <div className={`booking-grid ${isRTL ? "rtl" : ""}`}>
+
+            {/* SELECT SIDE */}
+            <div className="booking-selects">
+
+              <div className="form-group custom-dropdown">
+                <Dropdown onSelect={(e) => setSelectedDepartment(e)}>
+                  <Dropdown.Toggle variant="light">
+                    {selectedDepartment || t("selectDepartment")}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {departments.map((dept) => (
+                      <Dropdown.Item key={dept.id} eventKey={dept.name}>
+                        {dept.name}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+              <div className="form-group custom-dropdown">
+                <Dropdown onSelect={(e) => setSelectedDoctor(e)}>
+                  <Dropdown.Toggle variant="light">
+                    {selectedDoctor || t("selectDoctor")}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {doctors.map((doc) => (
+                      <Dropdown.Item key={doc.id} eventKey={doc.name}>
+                        {doc.name}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+              <div className="form-group custom-dropdown">
+                <Dropdown onSelect={(e) => setSelectedCity(e)}>
+                  <Dropdown.Toggle variant="light">
+                    {selectedCity || t("selectCity")}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {cities.map((city) => (
+                      <Dropdown.Item key={city.id} eventKey={city.name}>
+                        {city.name}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+            </div>
+
+            {/* INPUT SIDE */}
+            <div className="booking-inputs">
+
+              <div className="form-group input_div">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={t("yourName")}
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                />
+                {errors.name && (
+                  <small className="text-danger">{errors.name}</small>
+                )}
+              </div>
+
+              <div className="form-group input_div">
+                <input
+                  type="tel"
+                  className="form-control"
+                  placeholder={t("phoneNumbers")}
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  required
+                />
+                {errors.phone && (
+                  <small className="text-danger">{errors.phone}</small>
+                )}
+              </div>
+
+              <div className="form-group input_div">
+                <input
+                  type="date"
+                  className="form-control control_date"
+                  value={formData.date}
+                  onChange={(e) =>
+                    setFormData({ ...formData, date: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+            </div>
           </div>
 
-          <div className="form-group custom-dropdown">
-            <Dropdown onSelect={(e) => setSelectedDoctor(e)}>
-              <Dropdown.Toggle variant="light" id="dropdown-doctor">
-                {selectedDoctor || t("selectDoctor")}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item disabled>
-                  {selectedDoctor ? t("changeDoctor") : t("selectDoctor")}
-                </Dropdown.Item>
-                {doctors
-                  .filter(
-                    (doc) =>
-                      !selectedDepartment ||
-                      departments.find(
-                        (dept) =>
-                          dept.name === selectedDepartment &&
-                          dept.id === doc.departmentId
-                      )
-                  )
-                  .map((doc) => (
-                    <Dropdown.Item key={doc.id} eventKey={doc.name}>
-                      {doc.name}
-                    </Dropdown.Item>
-                  ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-
-          <div className="form-group custom-dropdown">
-            <Dropdown onSelect={(e) => setSelectedCity(e)}>
-              <Dropdown.Toggle variant="light" id="dropdown-city">
-                {selectedCity || t("selectCity")}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item disabled>
-                  {selectedCity ? t("changeCity") : t("selectCity")}
-                </Dropdown.Item>
-                {cities.map((city) => (
-                  <Dropdown.Item key={city.id} eventKey={city.name}>
-                    {city.name}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-
-          {/* Name */}
-          <div className="form-group input_div">
-            <input
-              type="text"
-              className="form-control"
-              placeholder={t("yourName")}
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              required
-            />
-            {errors.name && (
-              <small className="text-danger">{errors.name}</small>
-            )}
-          </div>
-
-          {/* Phone */}
-          <div className="form-group input_div">
-            <input
-              type="tel"
-              className="form-control"
-              placeholder={t("phoneNumbers")}
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
-              required
-            />
-            {errors.phone && (
-              <small className="text-danger">{errors.phone}</small>
-            )}
-          </div>
-
-          {/* Date */}
-          <div className="form-group input_div">
-            <input
-              type="date"
-              className="form-control control_date"
-              value={formData.date}
-              onChange={(e) =>
-                setFormData({ ...formData, date: e.target.value })
-              }
-              required
-              placeholder={t("selectDate")}
-            />
-          </div>
-
+          {/* BUTTON FULL WIDTH */}
           <button
             type="submit"
-            className="btn btn-secondary btn_secondary btn-lg"
+            className="btn btn-secondary btn_secondary btn-lg booking-btn"
           >
             {t("appointmentNow")}
           </button>
+
         </form>
       </div>
     </section>

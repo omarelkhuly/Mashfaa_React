@@ -10,7 +10,7 @@ import {
     faLinkedinIn
 } from '@fortawesome/free-brands-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-
+import backgroundFooter from '../../assets/background_footer.jpg';
 import Logo from '../../assets/logo.png';
 import './footer.css';
 
@@ -23,7 +23,12 @@ const ContainerFooter = () => {
     };
 
     return (
-        <footer>
+        <footer
+            className="footer-area"
+            style={{
+                backgroundImage: `url(${backgroundFooter})`,
+            }}
+        >
             <div className='container'>
                 <div className='row'>
 
@@ -75,27 +80,27 @@ const ContainerFooter = () => {
                             <h3 className="footer_title">{t("ourServices")}</h3>
                             <ul>
                                 <li>
-                                    <button className='btn'  onClick={() => handleBlogClick('Dental Care')}>
+                                    {/* <button className='btn'  onClick={() => handleBlogClick('Dental Care')}>
                                         {t("serviceDental")}
-                                    </button>
+                                    </button> */}
                                 </li>
                                 <li>
-                                    <button className='btn'  onClick={() => handleBlogClick('Special Surgeon')}>
+                                    <button className='btn' onClick={() => handleBlogClick('Special Surgeon')}>
                                         {t("serviceSurgeon")}
                                     </button>
                                 </li>
                                 <li>
-                                    <button className='btn'  onClick={() => handleBlogClick('Skin Surgeon')}>
+                                    <button className='btn' onClick={() => handleBlogClick('Skin Surgeon')}>
                                         {t("serviceSkin")}
                                     </button>
                                 </li>
                                 <li>
-                                    <button className='btn'  onClick={() => handleBlogClick('Understand Health')}>
+                                    <button className='btn' onClick={() => handleBlogClick('Understand Health')}>
                                         {t("serviceHealth")}
                                     </button>
                                 </li>
                                 <li>
-                                    <button className='btn'  onClick={() => handleBlogClick('Dentist Regularly')}>
+                                    <button className='btn' onClick={() => handleBlogClick('Dentist Regularly')}>
                                         {t("serviceDentist")}
                                     </button>
                                 </li>

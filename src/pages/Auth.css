@@ -1,3 +1,4 @@
+/* src/pages/Auth.css */
 .auth-wrapper {
   padding-top: 70px;
   /* height: 100vh; */
@@ -36,7 +37,7 @@
   transform: rotateY(180deg);
 }
 
-.addres_color{
+.addres_color {
   color: var(--main-color);
   font-weight: 600;
 }
@@ -87,23 +88,80 @@
   flex-wrap: nowrap;
 }
 
-.input-group i {
+/* ================= INPUT GROUP ================= */
+
+.input-group {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+/* الأيقونة جوه الحقل */
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--main-color);
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+/* RTL Support */
+html[dir="rtl"] .input-icon {
+  left: auto;
+  right: 12px;
+}
+
+/* ================= INPUT ================= */
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  background: transparent;
+  transition: 0.3s ease;
+}
+
+/* RTL padding */
+html[dir="rtl"] .input-group input,
+html[dir="rtl"] .input-group select {
+  padding: 12px 40px 12px 15px;
+}
+
+/* Focus Effect */
+.input-group input:focus,
+.input-group select:focus {
+  border-bottom: 1px solid var(--main-color);
+}
+
+/* لما يحصل فوكس لون الأيقونة يتغير */
+.input-group input:focus~.input-icon,
+.input-group select:focus~.input-icon {
+  color: var(--color-heavy);
+}
+
+
+/* .input-group i {
   position: absolute;
   top: 12px;
   left: 0;
   color: var(--main-color);
-}
+} */
 
-.icon_auth svg.svg-inline--fa{
- color: var(--main-color); 
-}
-
-.input-group input {
+/* .input-group input {
   width: 100%;
   padding: 12px 0 12px 25px;
   border: none;
   border-bottom: 1px solid #ccc;
   outline: none;
+  } */
+
+.icon_auth svg.svg-inline--fa {
+  color: var(--main-color);
 }
 
 .success-alert {

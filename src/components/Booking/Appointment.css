@@ -29,12 +29,12 @@
     text-align: left;
     background: #fff;
     color: #333;
-    border: 1px solid rgba(86,90,207,0.3);
+    border: 1px solid rgba(86, 90, 207, 0.3);
 }
 
 .custom-dropdown .dropdown-menu.show {
     width: 100%;
-    box-shadow: 0 0 4px rgba(86,90,207,0.2);
+    box-shadow: 0 0 4px rgba(86, 90, 207, 0.2);
 }
 
 .input_div {
@@ -44,7 +44,7 @@
 .input_div .form-control {
     height: 50px;
     border-radius: 8px;
-    border: 1px solid rgba(86,90,207,0.3);
+    border: 1px solid rgba(86, 90, 207, 0.3);
     padding: 0 15px;
 }
 
@@ -58,4 +58,42 @@ button.btn_secondary {
     border-radius: 8px;
     background-color: var(--main-color);
     border: 1px solid var(--border-color);
+}
+
+/* ================= GRID LAYOUT ================= */
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+/* RTL swap */
+.booking-grid.rtl {
+    direction: rtl;
+}
+
+/* sides */
+.booking-selects,
+.booking-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+/* button */
+.booking-btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    background-color: var(--main-color);
+    border: 1px solid var(--border-color);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .booking-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -18,21 +18,11 @@ import AboutUs from '../components/AboutUs/AboutUs';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ImgOne from '../assets/bg_img.png';
 
-import ImgInmaOne from '../assets/img_inemation1.png';
-import ImgInmaTwo from '../assets/img_inemation2.png';
-import ImgInmaThree from '../assets/img_inemation4.png';
-import ImgInmaFour from '../assets/img_inemation9.png';
-import ImgInmaFive from '../assets/img_inemation12.png';
+import iconHome from '../assets/iconhome.png';
+
 import bachgroundHome from '../assets/backgrond_home.jpg';
 import bachgroundContect from '../assets/backgrond_contact.jpg';
 import backgroundAppointment from '../assets/backgrond_appointment.jpg';
-
-import Appointment1 from '../assets/appointment1.png';
-import Appointment2 from '../assets/appointment2.png';
-import Appointment3 from '../assets/appointment3.png';
-import Appointment4 from '../assets/appointment4.png';
-import Appointment5 from '../assets/appointment5.png';
-import Appointment6 from '../assets/appointment6.png';
 
 import Stethoscope from '../assets/stethoscope.png'
 import FirstAidKit from '../assets/first-aid-kit.png';
@@ -60,18 +50,13 @@ const Home = () => {
 
                             <div className='col-lg-5 col-md-6 col-sm-5'>
                                 <div className='img_bg_one'>
-                                    <img src={ImgOne} alt='bg-img' className='imgOne' />
+                                    <img src={iconHome} alt='bg-img' className='imgOne' />
                                 </div>
                             </div>
                         </div>
+                        {/* <img src={iconHome} alt='icon-home' className='icon-home subscriber' /> */}
                     </div>
-
                 </div>
-                <img className='img_inm1 subscriber' alt="discrption" src={ImgInmaOne} />
-                <img className='img_inm2 subscriber' alt="discrption" src={ImgInmaTwo} />
-                <img className='img_inm3 subscriber' alt="discrption" src={ImgInmaThree} />
-                <img className='img_inm4 subscriber' alt="discrption" src={ImgInmaFour} />
-                <img className='img_inm5 subscriber' alt="discrption" src={ImgInmaFive} />
             </header >
             <AboutUs />
             <section

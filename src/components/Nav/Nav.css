@@ -29,11 +29,11 @@ nav .navbar-nav a {
 }
 
 nav .navbar-nav a:hover {
-    color: var(--green-color) !important;
+    color: var(--color-green) !important;
 }
 
 nav .navbar-nav .active {
-    color: var(--green-color) !important;
+    color: var(--color-green) !important;
 }
 
 .logo_image {
