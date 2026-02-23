@@ -27,9 +27,15 @@ const Booking = () => {
         const res = await axios.get(
           "https://tabybak.com/api/provider/v1/cities/1"
         );
-        if (res.data.status) setCities(res.data.data);
+        console.log("Cities Response:", res.data);
+        if (res.data.status && Array.isArray(res.data.data)) {
+          setCities(res.data.data);
+        } else {
+          setCities([]);
+        }
       } catch (error) {
         console.error("Failed to fetch cities:", error);
+        setCities([]);
       }
     };
     fetchCities();

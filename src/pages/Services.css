@@ -46,6 +46,7 @@ span.icon-cell {
 .feature-bx2 .icon-content p {
     font-size: 20px;
     margin-bottom: 20px;
+    color: var(--color-green);
 }
 
 .btn-primary.light {

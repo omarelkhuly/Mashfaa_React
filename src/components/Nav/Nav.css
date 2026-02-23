@@ -249,9 +249,13 @@ main {
     height: 35px;
     border-radius: 50% !important;
     text-align: center;
+    color: white;
 }
 
 @media only screen and (max-width: 992px) {
+    .logo_style_nav{
+    width: 20%;
+}
     .navbar-nav .dropdown-menu {
         width: 100% !important;
     }

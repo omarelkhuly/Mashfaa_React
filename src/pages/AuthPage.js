@@ -11,8 +11,15 @@ import {
   faArrowRight,
   faGlobe,
   faCity,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
-import { loginApi, registerApi } from "../api/auth";
+import {
+  loginApi,
+  registerApi,
+  forgetPasswordApi,
+  resetPasswordApi,
+} from "../api/auth";
 import axios from "axios";
 import LoginImg from "../assets/frontImg.jpeg";
 import RegisterImg from "../assets/backImg.png";
@@ -25,6 +32,9 @@ const AuthPage = () => {
   const isRTL = i18n.language === "ar";
 
   const [mode, setMode] = useState("login");
+  const [emailForReset, setEmailForReset] = useState("");
+  const [pinCode, setPinCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -66,7 +76,13 @@ const AuthPage = () => {
     axios
       .get("https://tabybak.com/api/provider/v1/countries/")
       .then((res) => {
-        if (res.data.status) setCountries(res.data.data);
+        if (res.data.status) {
+          const countriesData = Array.isArray(res.data.data)
+            ? res.data.data
+            : res.data.data?.data || [];
+
+          setCountries(countriesData);
+        }
       });
   }, []);
 
@@ -79,7 +95,13 @@ const AuthPage = () => {
         `https://tabybak.com/api/provider/v1/cities/${registerData.country_id}`
       )
       .then((res) => {
-        if (res.data.status) setCities(res.data.data);
+        if (res.data.status) {
+          const citiesData = Array.isArray(res.data.data)
+            ? res.data.data
+            : res.data.data?.data || [];
+
+          setCities(citiesData);
+        }
       });
   }, [registerData.country_id]);
 
@@ -141,6 +163,49 @@ const AuthPage = () => {
     setLoading(false);
   };
 
+  /* ================= FORGET PASSWORD ================= */
+  const handleForgetPassword = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await forgetPasswordApi(emailForReset);
+
+      if (res.data.status) {
+        setSuccessMessage("Pin Code Sent To Your Email ✅");
+        setMode("reset");
+      }
+    } catch {
+      alert("Failed to send pin code");
+    }
+
+    setLoading(false);
+  };
+
+  /* ================= RESET PASSWORD ================= */
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await resetPasswordApi({
+        email: emailForReset,
+        pin_code: pinCode,
+        password: newPassword,
+        password_confirmation: newPassword,
+      });
+
+      if (res.data.status) {
+        setSuccessMessage("Password Reset Successfully 🎉");
+        setMode("login");
+      }
+    } catch {
+      alert("Reset Failed");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <div className="auth-wrapper icon_auth">
       <div className={`auth-card ${mode === "register" ? "flip" : ""}`}>
@@ -148,39 +213,100 @@ const AuthPage = () => {
         {/* LOGIN */}
         <div className="auth-face auth-front">
           <div className="form-side">
-            <form onSubmit={handleLogin}>
-              <h2 className="addres_color">{t("loginTitle")}</h2>
+            {mode === "login" && (
+              <form onSubmit={handleLogin}>
+                <h2 className="addres_color">{t("loginTitle")}</h2>
 
-              <Input
-                icon={faEnvelope}
-                type="email"
-                placeholder={t("email")}
-                onChange={(e) =>
-                  setLoginData({ ...loginData, email: e.target.value })
-                }
-              />
+                <Input
+                  icon={faEnvelope}
+                  type="email"
+                  placeholder={t("email")}
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, email: e.target.value })
+                  }
+                />
 
-              <Input
-                icon={faLock}
-                type="password"
-                placeholder={t("password")}
-                onChange={(e) =>
-                  setLoginData({ ...loginData, password: e.target.value })
-                }
-              />
+                <Input
+                  icon={faLock}
+                  type="password"
+                  placeholder={t("password")}
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, password: e.target.value })
+                  }
+                />
 
-              <button className="primary-btn">
-                {loading ? "..." : t("loginButton")}
-              </button>
+                <button className="primary-btn">
+                  {loading ? "..." : t("loginButton")}
+                </button>
+                <a
+                  href="#"
+                  className="switch-text"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMode("forget");
+                  }}
+                >
+                  {t("forgetPassword")}
+                </a>
 
-              <p className="switch-text">
-                {t("noAccount")}{" "}
-                <span onClick={() => navigate("/register")}>
-                  {t("createAccount")}{" "}
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </span>
-              </p>
-            </form>
+                <p className="switch-text">
+                  {t("noAccount")}{" "}
+                  <span onClick={() => navigate("/register")}>
+                    {t("createAccount")}{" "}
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </span>
+                </p>
+              </form>)}
+            {mode === "forget" && (
+              <form onSubmit={handleForgetPassword}>
+                <h2>{t("forgetPassword")}</h2>
+
+                <Input
+                  icon={faEnvelope}
+                  type="email"
+                  placeholder={t("email")}
+
+                  onChange={(e) => setEmailForReset(e.target.value)}
+                />
+
+                <button className="primary-btn">
+                  {loading ? "..." : t("sendCode")}
+                </button>
+
+                <a
+                  href="#"
+                  className="switch-text"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMode("login");
+                  }}
+                >
+                  {t("backToLogin")}
+                </a>
+              </form>
+            )}
+            {mode === "reset" && (
+              <form onSubmit={handleResetPassword}>
+                <h2>Reset Password</h2>
+
+                <Input
+                  icon={faLock}
+                  placeholder="Pin Code"
+                  onChange={(e) => setPinCode(e.target.value)}
+                />
+
+                <Input
+                  icon={faLock}
+                  type="password"
+                  placeholder="New Password"
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+
+                <button className="primary-btn">
+                  {loading ? "..." : "Reset Password"}
+                </button>
+              </form>
+            )}
           </div>
 
           <div className="image-side">
@@ -309,12 +435,31 @@ const AuthPage = () => {
 };
 
 /* INPUT */
-const Input = ({ icon, ...props }) => (
-  <div className="input-group">
-    <FontAwesomeIcon icon={icon} className="input-icon" />
-    <input {...props} required />
-  </div>
-);
+const Input = ({ icon, type = "text", ...props }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isPassword = type === "password";
+
+  return (
+    <div className="input-group" style={{ position: "relative" }}>
+      <FontAwesomeIcon icon={icon} className="input-icon" />
+
+      <input
+        {...props}
+        type={isPassword ? (showPassword ? "text" : "password") : type}
+        required
+      />
+
+      {isPassword && (
+        <FontAwesomeIcon
+          icon={showPassword ? faEyeSlash : faEye}
+          onClick={() => setShowPassword(!showPassword)}
+          className="password_toggle"
+        />
+      )}
+    </div>
+  );
+};
 
 /* SELECT */
 const Select = ({ icon, children, ...props }) => (

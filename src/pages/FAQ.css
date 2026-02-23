@@ -95,6 +95,7 @@
 
 .faq-answer.show {
     grid-template-rows: 1fr;
+    background-color: #33333336;
 }
 
 .faq-content {
@@ -109,6 +110,5 @@
 .faq-content p {
     margin: 0;
     font-size: 15px;
-    color: var(--main-color);
     line-height: 1.7;
 }

@@ -113,6 +113,29 @@ html[dir="rtl"] .input-icon {
   right: 12px;
 }
 
+.password_toggle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  transition: 0.3s;
+}
+
+.password_toggle:hover {
+  color: #000;
+}
+
+/* English - LTR */
+html[dir="ltr"] .password_toggle {
+  right: 15px;
+}
+
+/* Arabic - RTL */
+html[dir="rtl"] .password_toggle {
+  left: 15px;
+}
+
 /* ================= INPUT ================= */
 
 .input-group input,

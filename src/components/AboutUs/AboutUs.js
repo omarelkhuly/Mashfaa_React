@@ -61,7 +61,7 @@ const AboutUs = () => {
         <div className="col-lg-6 mb-30">
           <div className="heading-bx">
             <h6 className="title-ext text_secondary">{t("titleSmall")}</h6>
-            <h2 className="title_about1">{t("title")}</h2>
+            <h2 className="title_about1">{t("titleAbout")}</h2>
             <p className="title_about2">{aboutData || t("description")}</p>
           </div>
 

@@ -18,6 +18,8 @@ import Services from './pages/Services';
 import Team from './pages/Team';
 import PageNotFound from './pages/FAQ';
 import AuthPage from './pages/AuthPage';
+import Account from './pages/Account';
+import Profile from './pages/Profile';
 import DetailsPage from './components/Booking/DetailsPage';
 import ServicesDetails from './pages/ServicesDetails';
 import SearchBar from './components/ModealSearch/ModealSearch';
@@ -56,7 +58,9 @@ function App() {
             <Route path="/servicesDetails/:serviceType" element={<ServicesDetails />} />
             <Route path="/Register" element={<AuthPage />} />
             <Route path="/Login" element={<AuthPage />} />
-            
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/account" element={<Account />} />
+
           </Route>
 
         </Routes>

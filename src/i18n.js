@@ -6,6 +6,7 @@ const resources = {
   en: {
     translation: {
       "siteTitle": "MASHFAA",
+
       // Navbar
       home: "Home",
       pages: "Pages",
@@ -17,6 +18,9 @@ const resources = {
       booking: "Booking",
       login: "Login",
       register: "Register",
+      forgetPassword: "Forgot Password?",
+      backToLogin: "Back To Login",
+      sendCode: "Send Code",
 
       // Footer
       footerDesc: "Lorem ipsum is dolor sit amet, consectetur adipiscing elit.",
@@ -40,11 +44,99 @@ const resources = {
       loginButton: "Login",
       createAccount: "Create New Account",
       loginRequired: "Please enter email and password",
-      "selectCountry": "Select Country",
-      "selectCity": "Select City",
+      selectCountry: "Select Country",
+      selectCity: "Select City",
       loginSuccess: "Login successful ✅",
       loginFail: "Login failed ❌",
       noAccount: "Don't have an account?",
+
+      // Register
+      registerTitle: "Register",
+      registerButton: "Register Now",
+      haveAccount: "Already have an account?",
+      name: "Name",
+      confirmPassword: "Confirm Password",
+      phone: "Phone Number",
+      countryId: "Country Code",
+      cityId: "City Code",
+      requiredField: "Please enter",
+      passwordMismatch: "Password and confirm password do not match ❌",
+      registerSuccess: "Account created successfully 🎉",
+      registerFail: "Failed to create account",
+      registerError: "An error occurred during registration ❌",
+
+      // Profile
+      profile: "Profile",
+      editProfile: "Edit Profile",
+      contactInfo: "Contact Information",
+      location: "Location",
+      unitedArabEmirates: "United Arab Emirates",
+      businessInfo: "Business Information",
+      commercialName: "Commercial Name",
+      commercialRecord: "Commercial Record",
+      licenseNumber: "License Number",
+      taxNumber: "Tax Number",
+      subscription: "Subscription",
+      subscriptionStatus: "Subscription Status",
+      expiresAt: "Expires at",
+      noSubscription: "No Subscription",
+      active: "Active",
+      expired: "Expired",
+      accountTimeline: "Account Timeline",
+      registrationDate: "Registration Date",
+      lastUpdated: "Last Updated",
+      providerType: "Provider Type",
+      loading: "Loading...",
+      error: "Error",
+      retry: "Retry",
+      unknown: "Unknown",
+      account: "Account",
+      logout: "Logout",
+      // ================= ACCOUNT PAGE =================
+      "account.title": "Account Settings",
+      "account.personalInfo": "Personal Information",
+      "account.businessInfo": "Business Information",
+      "account.contactInfo": "Contact Information",
+      "account.saveChanges": "Save Changes",
+      "account.savedSuccess": "Changes saved successfully!",
+      "account.savedError": "Failed to save changes",
+      "account.loading": "Loading...",
+      "account.edit": "Edit",
+      "account.cancel": "Cancel",
+      "account.name": "Name",
+      "account.email": "Email",
+      "account.phone": "Phone",
+      "account.commercialName": "Commercial Name",
+      "account.commercialRecord": "Commercial Record Number",
+      "account.licenseNumber": "License Number",
+      "account.taxNumber": "Tax Number",
+      "account.providerType": "Provider Type",
+      "account.description": "Description",
+      "account.logo": "Logo",
+      "account.cover": "Cover Image",
+      "account.changeLogo": "Change Logo",
+      "account.changeCover": "Change Cover",
+      "account.selectFile": "Select File",
+      "account.noFile": "No file selected",
+      "account.country": "Country",
+      "account.city": "City",
+      "account.status": "Status",
+      "account.subscription": "Subscription",
+      "account.memberSince": "Member Since",
+      "account.lastUpdate": "Last Update",
+
+      // Status
+      statusPending: "Pending",
+      statusActive: "Active",
+      statusRejected: "Rejected",
+
+      // Provider Types
+      providerTypeClinic: "Clinic",
+      providerTypeHospital: "Hospital",
+      providerTypeLab: "Laboratory",
+      providerTypeXray: "X-Ray Center",
+      providerTypeBeauty: "Beauty Center",
+      providerTypeRehab: "Rehabilitation",
 
       // index
       headerSubtitle: "We Provide All Health Care Solution",
@@ -62,7 +154,7 @@ const resources = {
 
       // Services Section
       servicesTitle: "We Cover A Big Variety Of Medical Services",
-      servicesDesc: "We provide the special tips and advice’s of health care treatment and high level of best.",
+      servicesDesc: "We provide the special tips and advice's of health care treatment and high level of best.",
       allServices: "All Services",
       diagnostics: "Diagnostics",
       treatment: "Treatment",
@@ -90,9 +182,6 @@ const resources = {
       cardiologist: "Cardiologist",
       sectionSubTitle: "Our Doctor",
       sectionTitle: "Meet Best Doctors",
-      dentist: "Dentist",
-      chiropractor: "Chiropractor",
-      cardiologist: "Cardiologist",
 
       // Blogs
       blogTitle1: "Dental Care for Women is very important",
@@ -112,14 +201,11 @@ const resources = {
 
       // faq
       faq: "Frequently Asked Questions",
-      loading: "Loading...",
       back: "Back To Home",
       noFaq: "No questions available",
 
       // Contact
       getInTouch: "Get in Touch",
-      name: "Name",
-      email: "Email",
       message: "Message",
       sendMessage: "Send Message",
       sending: "Sending...",
@@ -130,20 +216,17 @@ const resources = {
       errorMessage: "Message cannot be empty.",
       contactTitle: "Get in Touch",
       contactInfoTitle: "Contact Us For Any Informations",
-      location: "Location",
       emailPhone: "Email & Phone",
       followUs: "Follow Us",
       contactNumber: "Contact Number",
-      emailAddress: "Email Address",
       address: "Address",
 
       // about us
       titleSmall: "About Us",
-      title: "The Great Place Of Medical Hospital Center",
+      titleAbout: "The Great Place Of Medical Hospital Center",
       description: "We provide special tips and advice of health care treatment using advanced medical technology.",
       experience: "Year Experience",
       emergency: "Emergency Help",
-      doctors: "Qualified Doctors",
       professionals: "Best Professionals",
       treatment: "Medical Treatment",
 
@@ -163,6 +246,7 @@ const resources = {
   ar: {
     translation: {
       "siteTitle": "مشفى",
+
       // Navbar
       home: "الرئيسية",
       pages: "الصفحات",
@@ -174,6 +258,9 @@ const resources = {
       booking: "الحجز",
       login: "تسجيل الدخول",
       register: "إنشاء حساب",
+      forgetPassword: "نسيت كلمة المرور؟",
+      backToLogin: "العودة لتسجيل الدخول",
+      sendCode: "إرسال الرمز",
 
       // Footer
       footerDesc: "نقدم أفضل خدمات الرعاية الصحية بأعلى جودة.",
@@ -204,29 +291,10 @@ const resources = {
       noAccount: "ليس لديك حساب؟",
 
       // Register
-      registerTitle: "Create Account",
-      registerButton: "Register Now",
-      haveAccount: "Already have an account? Login",
-      name: "Full Name",
-      email: "Email Address",
-      password: "Password",
-      confirmPassword: "Confirm Password",
-      phone: "Phone Number",
-      countryId: "Country ID",
-      cityId: "City ID",
-      requiredField: "Please enter",
-      passwordMismatch: "Password and confirmation do not match ❌",
-      registerSuccess: "Account created successfully 🎉",
-      registerFail: "Registration failed",
-      registerError: "An error occurred during registration ❌",
-
-      // Register
       registerTitle: "تسجيل جديد",
       registerButton: "سجل الآن",
       haveAccount: "لديك حساب؟ تسجيل الدخول",
       name: "الاسم",
-      email: "البريد الإلكتروني",
-      password: "كلمة المرور",
       confirmPassword: "تأكيد كلمة المرور",
       phone: "رقم الهاتف",
       countryId: "كود الدولة",
@@ -236,6 +304,80 @@ const resources = {
       registerSuccess: "تم إنشاء الحساب بنجاح 🎉",
       registerFail: "فشل إنشاء الحساب",
       registerError: "حدث خطأ أثناء التسجيل ❌",
+
+      // Profile
+      profile: "الملف الشخصي",
+      editProfile: "تعديل الملف",
+      contactInfo: "معلومات الاتصال",
+      location: "الموقع",
+      unitedArabEmirates: "الإمارات العربية المتحدة",
+      businessInfo: "المعلومات التجارية",
+      commercialName: "الاسم التجاري",
+      commercialRecord: "السجل التجاري",
+      licenseNumber: "رقم الترخيص",
+      taxNumber: "الرقم الضريبي",
+      subscription: "الاشتراك",
+      subscriptionStatus: "حالة الاشتراك",
+      expiresAt: "ينتهي في",
+      noSubscription: "لا يوجد اشتراك",
+      active: "مشترك",
+      expired: "منتهي",
+      accountTimeline: "سجل الحساب",
+      registrationDate: "تاريخ التسجيل",
+      lastUpdated: "آخر تحديث",
+      providerType: "نوع المزود",
+      loading: "جاري التحميل...",
+      error: "حدث خطأ",
+      retry: "إعادة المحاولة",
+      unknown: "غير معروف",
+      account: "الحساب",
+      logout: "تسجيل الخروج",
+
+      // ================= ACCOUNT PAGE =================
+      "account.title": "إعدادات الحساب",
+      "account.personalInfo": "المعلومات الشخصية",
+      "account.businessInfo": "المعلومات التجارية",
+      "account.contactInfo": "معلومات الاتصال",
+      "account.saveChanges": "حفظ التغييرات",
+      "account.savedSuccess": "تم حفظ التغييرات بنجاح!",
+      "account.savedError": "فشل في حفظ التغييرات",
+      "account.loading": "جاري التحميل...",
+      "account.edit": "تعديل",
+      "account.cancel": "إلغاء",
+      "account.name": "الاسم",
+      "account.email": "البريد الإلكتروني",
+      "account.phone": "رقم الهاتف",
+      "account.commercialName": "الاسم التجاري",
+      "account.commercialRecord": "رقم السجل التجاري",
+      "account.licenseNumber": "رقم الترخيص",
+      "account.taxNumber": "الرقم الضريبي",
+      "account.providerType": "نوع المزود",
+      "account.description": "الوصف",
+      "account.logo": "الشعار",
+      "account.cover": "صورة الغلاف",
+      "account.changeLogo": "تغيير الشعار",
+      "account.changeCover": "تغيير صورة الغلاف",
+      "account.selectFile": "اختر ملف",
+      "account.noFile": "لم يتم اختيار ملف",
+      "account.country": "الدولة",
+      "account.city": "المدينة",
+      "account.status": "الحالة",
+      "account.subscription": "الاشتراك",
+      "account.memberSince": "عضو منذ",
+      "account.lastUpdate": "آخر تحديث",
+
+      // Status
+      statusPending: "قيد الانتظار",
+      statusActive: "نشط",
+      statusRejected: "مرفوض",
+
+      // Provider Types
+      providerTypeClinic: "عيادة",
+      providerTypeHospital: "مستشفى",
+      providerTypeLab: "مختبر",
+      providerTypeXray: "مركز أشعة",
+      providerTypeBeauty: "مركز تجميل",
+      providerTypeRehab: "مركز تأهيل",
 
       // index
       headerSubtitle: "نقدم جميع حلول الرعاية الصحية",
@@ -282,21 +424,12 @@ const resources = {
       cardiologist: "طبيب قلب",
       sectionSubTitle: "أطباؤنا",
       sectionTitle: "تعرف على أفضل الأطباء",
-      dentist: "طبيب أسنان",
-      chiropractor: "تقويم العمود الفقري",
-      cardiologist: "طبيب قلب",
 
       // Blogs
       blogTitle1: "العناية بالأسنان للنساء مهمة جدًا",
       blogTitle2: "يوجد في هذا المستشفى جراحون متخصصون",
       blogTitle3: "لماذا يُعتبر جراح الجلد أقل تقديرًا",
       blogTitle4: "افهم صحتك قبل أن تندم",
-
-      // faq
-      faq: "الأسئلة الشائعة",
-      loading: "جاري التحميل...",
-      back: "العودة للرئيسية",
-      noFaq: "لا توجد أسئلة متاحة",
 
       // testimonial
       testimonial_title: "شهادات المرضى",
@@ -308,10 +441,13 @@ const resources = {
       testimonial_review_5: "دكتور فعال ومهتم.",
       testimonial_review_6: "تجربة ممتازة بشكل عام.",
 
+      // faq
+      faq: "الأسئلة الشائعة",
+      back: "العودة للرئيسية",
+      noFaq: "لا توجد أسئلة متاحة",
+
       // Contact Form
       getInTouch: "تواصل معنا",
-      name: "الاسم",
-      email: "البريد الإلكتروني",
       message: "الرسالة",
       sendMessage: "إرسال الرسالة",
       sending: "جاري الإرسال...",
@@ -322,20 +458,17 @@ const resources = {
       errorMessage: "لا يمكن ترك الرسالة فارغة.",
       contactTitle: "تواصل معنا",
       contactInfoTitle: "تواصل معنا لأي استفسارات",
-      location: "الموقع",
       emailPhone: "البريد الإلكتروني والهاتف",
       followUs: "تابعنا",
       contactNumber: "رقم التواصل",
-      emailAddress: "البريد الإلكتروني",
       address: "العنوان",
 
       // about us
       titleSmall: "من نحن",
-      title: "أفضل مركز طبي للعلاج والرعاية الصحية",
+      titleAbout: "أفضل مركز طبي للعلاج والرعاية الصحية",
       description: "نقدم أفضل النصائح الطبية وخدمات الرعاية الصحية باستخدام أحدث التقنيات.",
       experience: "سنة خبرة",
       emergency: "مساعدة طارئة",
-      doctors: "أطباء مؤهلون",
       professionals: "أفضل المتخصصين",
       treatment: "العلاج الطبي",
 

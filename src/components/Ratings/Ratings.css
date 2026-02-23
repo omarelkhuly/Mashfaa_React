@@ -20,7 +20,7 @@
 }
 
 .feature-bx3:hover {
-    background-color: var( --hover-btn-color);
+    background-color: var(--hover-btn-color);
 }
 
 .feature-bx3 .counter,
@@ -39,6 +39,7 @@
 .feature-bx3 p {
     font-size: 20px;
     margin-bottom: 20px;
+    color: var(--color-heavy);
 }
 
 .feature-bx3:hover .counter,
