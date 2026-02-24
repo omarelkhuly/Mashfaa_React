@@ -85,3 +85,14 @@ ul.social_media li {
 .iconclass{
     font-size: 40px;
 }
+
+@media (max-width:798px) {
+    .contact_info{
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .icon-box{
+        margin: 0 !important;
+    }
+}

@@ -31,11 +31,11 @@ const Contact = () => {
         <h3>{t("contactTitle")}</h3>
 
         <div className="row">
-          <div className="col-lg-6 mb-30">
+          <div className="col-lg-6 col-sm-12 mb-30">
             <ContactForm />
           </div>
 
-          <div className="col-lg-6 mb-30">
+          <div className="col-lg-6 col-sm-12 mb-30">
             <div className="contact-info contact_info ovpr-dark">
               <div className="info-inner info_inner">
                 <h4 className="title mb-30">

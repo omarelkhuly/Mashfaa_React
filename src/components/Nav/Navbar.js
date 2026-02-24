@@ -77,152 +77,158 @@ const ContainerNav = ({ serviceType, blogType }) => {
     window.dispatchEvent(new Event("authChange"));
   };
 
-  return (
-    <Navbar expand="lg" className={isRTL ? "rtl-nav" : "ltr-nav"}>
-      <Container className="nav-container">
+  function CustomNavbar() {
+    const [expanded, setExpanded] = useState(false);
 
-        {/* LOGO */}
-        <Navbar.Brand className="logo_style_nav">
-          <Link to="/home">
-            <img className="logo_image" src={Logo} alt="Logo" />
-          </Link>
-        </Navbar.Brand>
+    return (
+      <Navbar expand="lg" expanded={expanded} className={isRTL ? "rtl-nav" : "ltr-nav"}>
+        <Container className="nav-container">
 
-        {/* ================= أيقونات الموبايل ================= */}
-        <div className="mobile-icons">
-          {/* الوضع الليلي */}
-          <button className="mobile_icon" onClick={() => setDarkMode(!darkMode)}>
-            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-          </button>
+          {/* LOGO */}
+          <Navbar.Brand className="logo_style_nav">
+            <Link onClick={() => setExpanded(false)} to="/home">
+              <img className="logo_image" src={Logo} alt="Logo" />
+            </Link>
+          </Navbar.Brand>
 
-          {/* اللغة */}
-          <button className="mobile_icon" onClick={toggleLang}>
-            <FontAwesomeIcon icon={faGlobe} />
-          </button>
-
-          {/* الملف الشخصي / تسجيل الدخول */}
-          {isLoggedIn ? (
-            <NavDropdown
-              title={<FontAwesomeIcon icon={faUser} />}
-              id="mobile-profile-dropdown"
-              align="end"
-              className="mobile-profile-dropdown"
-            >
-              <NavDropdown.Item as={Link} to="/profile">
-                <FontAwesomeIcon icon={faIdCard} className="me-2" />
-                {t("profile")}
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/account">
-                <FontAwesomeIcon icon={faUserCog} className="me-2" />
-                {t("account")}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={handleLogout}>
-                <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
-                {t("logout")}
-              </NavDropdown.Item>
-            </NavDropdown>
-          ) : (
-            <button className="mobile_icon" onClick={() => navigate("/Login")}>
-              <FontAwesomeIcon icon={faUser} />
-            </button>
-          )}
-        </div>
-
-        {/* قائمة الموبايل */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="mobile-toggle">
-          <div className="menu-icon"><span></span><span></span><span></span></div>
-        </Navbar.Toggle>
-
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className={`align-items-center ${isRTL ? "ms-auto text-end" : "me-auto text-start"}`}>
-
-            {/* الصفحة الرئيسية */}
-            <Link to="/home" className="nav-link">{t("home")}</Link>
-
-            {/* PAGES */}
-            <NavDropdown
-              title={t("pages")}
-              show={showPages}
-              onMouseEnter={() => setShowPages(true)}
-              onMouseLeave={() => setShowPages(false)}
-              onClick={() => setShowPages(!showPages)} // للـ mobile
-            >
-              <NavDropdown.Item as={Link} to="/About">{t("about")}</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/Team">{t("team")}</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/FAQ">FAQ</NavDropdown.Item>
-            </NavDropdown>
-
-            {/* SERVICES */}
-            <NavDropdown
-              title={t("services")}
-              show={showServices}
-              onMouseEnter={() => setShowServices(true)}
-              onMouseLeave={() => setShowServices(false)}
-              onClick={() => setShowServices(!showServices)} // للـ mobile
-            >
-              <NavDropdown.Item as={Link} to="/Services">{t("services")}</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={`/servicesDetails/${serviceType || 'default'}`}>{t("services")} Details</NavDropdown.Item>
-            </NavDropdown>
-
-            {/* booking */}
-            <Link to="/Reservation" className="nav-link">{t("booking")}</Link>
-
-            {/* BLOGS */}
-            <NavDropdown
-              title={t("blogs")}
-              show={showBlog}
-              onMouseEnter={() => setShowBlog(true)}
-              onMouseLeave={() => setShowBlog(false)}
-              onClick={() => setShowBlog(!showBlog)} // للـ mobile
-            >
-              <NavDropdown.Item as={Link} to="/Blog">{t("blogs")}</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={`/BlogsDetails/${blogType || 'default'}`}>{t("blogs")} Details</NavDropdown.Item>
-            </NavDropdown>
-
-            {/* الأزرار الثابتة */}
-            <button className="icon-btn" onClick={() => setDarkMode(!darkMode)}>
+          {/* ================= أيقونات الموبايل ================= */}
+          <div className="mobile-icons">
+            {/* الوضع الليلي */}
+            <button className="mobile_icon" onClick={() => setDarkMode(!darkMode)}>
               <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
             </button>
 
-            <button className="icon-btn" onClick={toggleLang}>
+            {/* اللغة */}
+            <button className="mobile_icon" onClick={toggleLang}>
               <FontAwesomeIcon icon={faGlobe} />
             </button>
 
-            {/* القائمة المنسدلة للملف الشخصي (Desktop) */}
+            {/* الملف الشخصي / تسجيل الدخول */}
             {isLoggedIn ? (
               <NavDropdown
-              // <FontAwesomeIcon icon={faUser} size="lg" />
-                title={<> <span className="ms-1">{t("profile")}</span></>}
-                id="profile-dropdown"
-                align={isRTL ? "start" : "end"}
-                className="profile-dropdown"
+                title={<FontAwesomeIcon icon={faUser} />}
+                id="mobile-profile-dropdown"
+                align="end"
+                className="mobile-profile-dropdown"
               >
-                <NavDropdown.Item as={Link} to="/profile">
-                  <FontAwesomeIcon icon={faIdCard} className="me-2" /> 
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/profile">
+                  <FontAwesomeIcon icon={faIdCard} className="me-2" />
                   {t("profile")}
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/account">
-                  <FontAwesomeIcon icon={faUserCog} className="me-2" /> 
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/account">
+                  <FontAwesomeIcon icon={faUserCog} className="me-2" />
                   {t("account")}
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogout}>
-                  <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> 
+                  <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
                   {t("logout")}
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Link to="/Login" className="btn nav-link login-btn">{t("login")}</Link>
+              <button className="mobile_icon" onClick={() => navigate("/Login")}>
+                <FontAwesomeIcon icon={faUser} />
+              </button>
             )}
+          </div>
 
-            <Link to="/Contact" className="btn nav-link">{t("contact")}</Link>
-            <SearchBar />
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-};
+          {/* قائمة الموبايل */}
+          <Navbar.Toggle aria-controls="basic-navbar-nav" 
+          className="mobile-toggle" onClick={() => setExpanded(expanded ? false : "expanded")}>
+            <div className="menu-icon"><span></span><span></span><span></span></div>
+          </Navbar.Toggle>
 
-export default ContainerNav;
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className={`align-items-center ${isRTL ? "ms-auto text-end" : "me-auto text-start"}`}>
+
+              {/* الصفحة الرئيسية */}
+              <Link onClick={() => setExpanded(false)} to="/home" className="nav-link">{t("home")}</Link>
+
+              {/* PAGES */}
+              <NavDropdown
+                title={t("pages")}
+                show={showPages}
+                onMouseEnter={() => setShowPages(true)}
+                onMouseLeave={() => setShowPages(false)}
+                onClick={() => setShowPages(!showPages)} // للـ mobile
+              >
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/About">{t("about")}</NavDropdown.Item>
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/Team">{t("team")}</NavDropdown.Item>
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/FAQ">FAQ</NavDropdown.Item>
+              </NavDropdown>
+
+              {/* SERVICES */}
+              <NavDropdown
+                title={t("services")}
+                show={showServices}
+                onMouseEnter={() => setShowServices(true)}
+                onMouseLeave={() => setShowServices(false)}
+                onClick={() => setShowServices(!showServices)} // للـ mobile
+              >
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/Services">{t("services")}</NavDropdown.Item>
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to={`/servicesDetails/${serviceType || 'default'}`}>{t("services")} Details</NavDropdown.Item>
+              </NavDropdown>
+
+              {/* booking */}
+              <Link onClick={() => setExpanded(false)} to="/Reservation" className="nav-link">{t("booking")}</Link>
+
+              {/* BLOGS */}
+              <NavDropdown
+                title={t("blogs")}
+                show={showBlog}
+                onMouseEnter={() => setShowBlog(true)}
+                onMouseLeave={() => setShowBlog(false)}
+                onClick={() => setShowBlog(!showBlog)} // للـ mobile
+              >
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/Blog">{t("blogs")}</NavDropdown.Item>
+                <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to={`/BlogsDetails/${blogType || 'default'}`}>{t("blogs")} Details</NavDropdown.Item>
+              </NavDropdown>
+
+              {/* الأزرار الثابتة */}
+              <button className="icon-btn" onClick={() => setDarkMode(!darkMode)}>
+                <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+              </button>
+
+              <button className="icon-btn" onClick={toggleLang}>
+                <FontAwesomeIcon icon={faGlobe} />
+              </button>
+
+              {/* القائمة المنسدلة للملف الشخصي (Desktop) */}
+              {isLoggedIn ? (
+                <NavDropdown
+                  // <FontAwesomeIcon icon={faUser} size="lg" />
+                  title={<> <span className="ms-1">{t("profile")}</span></>}
+                  id="profile-dropdown"
+                  align={isRTL ? "start" : "end"}
+                  className="profile-dropdown d-none d-lg-block"
+                >
+                  <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/profile">
+                    <FontAwesomeIcon icon={faIdCard} className="me-2" />
+                    {t("profile")}
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} onClick={() => setExpanded(false)} to="/account">
+                    <FontAwesomeIcon icon={faUserCog} className="me-2" />
+                    {t("account")}
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>
+                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                    {t("logout")}
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <Link onClick={() => setExpanded(false)} to="/Login" className="btn nav-link login-btn d-none d-lg-block">{t("login")}</Link>
+              )}
+
+              <Link onClick={() => setExpanded(false)} to="/Contact" className="btn nav-link">{t("contact")}</Link>
+              <SearchBar />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    );
+  }
+    return <CustomNavbar />;
+  };
+
+  export default ContainerNav;

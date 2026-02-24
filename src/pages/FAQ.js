@@ -53,7 +53,7 @@ const FAQ = () => {
         <div className="faq-overlay">
           <div className="container">
 
-            <h2 className="mb-4">{t("faq")}</h2>
+            <h2 className="mb-4 white">{t("faq")}</h2>
 
             {loading && <p>{t("loading")}</p>}
 

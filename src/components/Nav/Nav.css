@@ -154,25 +154,70 @@ button:not(:disabled) {
     color: #5a5b9c !important;
 }
 
+/* ================= Hamburger Base ================= */
+.navbar-collapse {
+    transition: all 0.4s ease;
+}
+
+.mobile-toggle {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0;
+}
+
 .menu-icon {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 24px;
+    width: 28px;
+    height: 22px;
+    position: relative;
     cursor: pointer;
 }
 
 .menu-icon span {
-    display: block;
+    position: absolute;
     width: 100%;
-    height: 4px;
-    background-color: #fff;
-    transition: all 0.3s ease;
+    height: 3px;
+    background: #0f766e;
+    /* نفس لون الثيم */
+    border-radius: 3px;
+    transition: 0.4s ease;
 }
 
-.menu-icon span:not(:last-child) {
-    margin-bottom: 5px;
+/* الخط الأول */
+.menu-icon span:nth-child(1) {
+    top: 0;
+}
+
+/* الخط الثاني */
+.menu-icon span:nth-child(2) {
+    top: 9px;
+}
+
+/* الخط الثالث */
+.menu-icon span:nth-child(3) {
+    top: 18px;
+}
+
+/* ================= Animation عند الفتح ================= */
+
+/* لما Bootstrap يضيف collapsed يتشال */
+.navbar-toggler:not(.collapsed) .menu-icon span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 9px;
+}
+
+.navbar-toggler:not(.collapsed) .menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggler:not(.collapsed) .menu-icon span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 9px;
+}
+
+/* Hover effect */
+.mobile-toggle:hover .menu-icon span {
+    background: #134e4a;
 }
 
 .color_icon {
@@ -203,7 +248,7 @@ button:not(:disabled) {
 /* Dark Theme */
 body.dark-theme {
     --bg-color: #020617;
-    --text-color: #f8fafc;
+    --text-color: #004444;
     --nav-bg: #a2d5d5;
     --card-bg: #020617;
     --border-color: #1e293b;
@@ -253,11 +298,15 @@ main {
 }
 
 @media only screen and (max-width: 992px) {
-    .logo_style_nav{
-    width: 20%;
-}
+    .logo_style_nav {
+        width: 20%;
+    }
+
     .navbar-nav .dropdown-menu {
         width: 100% !important;
+        border: none;
+        background: none;
+        box-shadow: none;
     }
 
     nav .navbar-nav button {
@@ -276,6 +325,14 @@ main {
 
     .mobile-icons {
         display: flex;
+    }
+
+    .modal-header {
+        justify-content: space-between;
+    }
+
+    .modal-header .btn-close {
+        margin: 0 !important;
     }
 
     /* اخفي النسخة الأصلية من الايقونات داخل القائمة */
@@ -297,5 +354,57 @@ main {
         font-size: 16px;
         font-weight: 500;
         margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .mobile_icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile_icon svg {
+        font-size: 20px;
+    }
+
+    .rtl-nav .dropdown-menu {
+        right: -50px !important;
+    }
+
+    .ltr-nav .dropdown-menu {
+        left: -50px !important;
+    }
+
+    .modal-header {
+        justify-content: space-between;
+    }
+
+    .modal-header .btn-close {
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 10px;
+        animation: slideDown 0.4s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
