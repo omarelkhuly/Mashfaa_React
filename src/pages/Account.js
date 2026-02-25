@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { getProfileApi, updateProfileApi } from "../api/auth";
+import {
+  getProfileApi,
+  updateProfileApi,
+  changePasswordApi,
+} from "../api/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -8,6 +12,8 @@ import {
   faPhone,
   faEdit,
   faSave,
+  faLock,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Account.css";
 
@@ -19,11 +25,20 @@ const Account = () => {
   const [loading, setLoading] = useState(true);
   const [imagePreview, setImagePreview] = useState(null);
 
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordData, setPasswordData] = useState({
+    old_password: "",
+    password: "",
+    password_confirmation: "",
+  });
+
+  const [passwordErrors, setPasswordErrors] = useState({});
+  const [passwordLoading, setPasswordLoading] = useState(false);
+
   useEffect(() => {
     fetchProfile();
   }, []);
 
-  /* ================= GET PROFILE ================= */
   const fetchProfile = async () => {
     try {
       const res = await getProfileApi();
@@ -32,13 +47,12 @@ const Account = () => {
         setImagePreview(res.data.data.logo);
       }
     } catch (err) {
-      console.error("Error fetching profile:", err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  /* ================= HELPER FOR TRANSLATED FIELDS ================= */
   const getValue = (field) => {
     if (!field) return "";
     if (typeof field === "object") {
@@ -47,7 +61,6 @@ const Account = () => {
     return field;
   };
 
-  /* ================= HANDLE CHANGE ================= */
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -59,12 +72,10 @@ const Account = () => {
     }
   };
 
-  /* ================= UPDATE PROFILE ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-
     formData.append("name", getValue(profile.name));
     formData.append("phone", profile.phone || "");
 
@@ -74,32 +85,55 @@ const Account = () => {
 
     try {
       await updateProfileApi(formData);
-      alert(t("account.savedSuccess"));
+      alert("Profile updated successfully");
     } catch (err) {
-      console.error(err);
-      alert(t("account.savedError"));
+      alert("Error updating profile");
     }
   };
 
-  /* ================= LOADING ================= */
-  if (loading) {
-    return (
-      <div className="profile-loading">
-        <div className="spinner"></div>
-      </div>
-    );
-  }
+  /* ================= CHANGE PASSWORD ================= */
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    setPasswordLoading(true);
+    setPasswordErrors({});
+
+    if (passwordData.password !== passwordData.password_confirmation) {
+      setPasswordErrors({
+        password_confirmation: "Passwords do not match",
+      });
+      setPasswordLoading(false);
+      return;
+    }
+
+    try {
+      await changePasswordApi(passwordData);
+
+      alert("Password changed successfully");
+      setShowPasswordModal(false);
+      setPasswordData({
+        old_password: "",
+        password: "",
+        password_confirmation: "",
+      });
+    } catch (err) {
+      if (err.response?.data?.errors) {
+        setPasswordErrors(err.response.data.errors);
+      } else {
+        alert("Error changing password");
+      }
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
+
+  if (loading) return <div className="profile-loading">Loading...</div>;
 
   return (
     <div className="account-wrapper">
       <div className="container mt-5 pt-5">
 
-        {/* Cover Section */}
         <div className="profile-header">
-          <div className="profile-cover">
-            <div className="cover-gradient"></div>
-          </div>
-
           <div className="profile-avatar">
             {imagePreview ? (
               <img src={imagePreview} alt="avatar" />
@@ -112,95 +146,133 @@ const Account = () => {
 
           <label className="edit-btn">
             <FontAwesomeIcon icon={faEdit} />
-            <input
-              type="file"
-              name="logo"
-              hidden
-              onChange={handleChange}
-            />
+            <input type="file" name="logo" hidden onChange={handleChange} />
           </label>
         </div>
 
-        {/* Title */}
         <div className="profile-title text-center mt-3">
           <h2>{getValue(profile?.name)}</h2>
         </div>
 
-        {/* Info Card */}
         <div className="row mt-4">
           <div className="col-lg-8 mx-auto">
             <div className="profile-card">
-              <h4 className="card-title">
-                <FontAwesomeIcon icon={faUser} className="me-2" />
-                {t("account.personalInfo")}
-              </h4>
 
               <form onSubmit={handleSubmit}>
-                {/* Name */}
-                <div className="info-item">
-                  <div className="info-icon">
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                  <div className="info-content">
-                    <span className="info-label">
-                      {t("account.name")}
-                    </span>
-                    <input
-                      type="text"
-                      name="name"
-                      value={getValue(profile?.name)}
-                      onChange={handleChange}
-                      className="form-control"
-                    />
-                  </div>
-                </div>
+                <input
+                  type="text"
+                  name="name"
+                  value={getValue(profile?.name)}
+                  onChange={handleChange}
+                  className="form-control mb-3"
+                />
 
-                {/* Email */}
-                <div className="info-item">
-                  <div className="info-icon">
-                    <FontAwesomeIcon icon={faEnvelope} />
-                  </div>
-                  <div className="info-content">
-                    <span className="info-label">
-                      {t("account.email")}
-                    </span>
-                    <input
-                      type="email"
-                      value={profile?.email || ""}
-                      disabled
-                      className="form-control"
-                    />
-                  </div>
-                </div>
+                <input
+                  type="email"
+                  value={profile?.email || ""}
+                  disabled
+                  className="form-control mb-3"
+                />
 
-                {/* Phone */}
-                <div className="info-item">
-                  <div className="info-icon">
-                    <FontAwesomeIcon icon={faPhone} />
-                  </div>
-                  <div className="info-content">
-                    <span className="info-label">
-                      {t("account.phone")}
-                    </span>
-                    <input
-                      type="text"
-                      name="phone"
-                      value={profile?.phone || ""}
-                      onChange={handleChange}
-                      className="form-control"
-                    />
-                  </div>
-                </div>
+                <input
+                  type="text"
+                  name="phone"
+                  value={profile?.phone || ""}
+                  onChange={handleChange}
+                  className="form-control mb-3"
+                />
 
-                {/* Save Button */}
-                <button type="submit" className="btn-save mt-3">
+                <button type="submit" className="btn-save">
                   <FontAwesomeIcon icon={faSave} className="me-2" />
-                  {t("account.saveChanges")}
+                  Save Changes
+                </button>
+              </form>
+
+              {/* 🔐 Change Password */}
+              <button
+                className="btn-change-password mt-3"
+                onClick={() => setShowPasswordModal(true)}
+              >
+                <FontAwesomeIcon icon={faLock} className="me-2" />
+                Change Password
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ===== Password Modal ===== */}
+        {showPasswordModal && (
+          <div className="password-modal">
+            <div className="password-box">
+              <div className="modal-header">
+                <h4>Change Password</h4>
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="close-icon"
+                  onClick={() => setShowPasswordModal(false)}
+                />
+              </div>
+
+              <form onSubmit={handlePasswordChange}>
+                <input
+                  type="password"
+                  placeholder="Old Password"
+                  className="form-control mb-2"
+                  value={passwordData.old_password}
+                  onChange={(e) =>
+                    setPasswordData({
+                      ...passwordData,
+                      old_password: e.target.value,
+                    })
+                  }
+                />
+                <small className="error-text">
+                  {passwordErrors.old_password}
+                </small>
+
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  className="form-control mb-2"
+                  value={passwordData.password}
+                  onChange={(e) =>
+                    setPasswordData({
+                      ...passwordData,
+                      password: e.target.value,
+                    })
+                  }
+                />
+                <small className="error-text">
+                  {passwordErrors.password}
+                </small>
+
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="form-control mb-3"
+                  value={passwordData.password_confirmation}
+                  onChange={(e) =>
+                    setPasswordData({
+                      ...passwordData,
+                      password_confirmation: e.target.value,
+                    })
+                  }
+                />
+                <small className="error-text">
+                  {passwordErrors.password_confirmation}
+                </small>
+
+                <button
+                  type="submit"
+                  className="btn-save w-100"
+                  disabled={passwordLoading}
+                >
+                  {passwordLoading ? "Updating..." : "Update Password"}
                 </button>
               </form>
             </div>
           </div>
-        </div>
+        )}
 
       </div>
     </div>

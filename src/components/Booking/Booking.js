@@ -11,35 +11,56 @@ import "./Appointment.css";
 const Booking = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-
   const isRTL = i18n.language === "ar";
+
+  const token = localStorage.getItem("token");
 
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+
+  const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
+
   const [formData, setFormData] = useState({ name: "", phone: "", date: "" });
   const [errors, setErrors] = useState({ name: "", phone: "" });
 
+  // ✅ fetch countries
   useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const res = await axios.get(
-          "https://tabybak.com/api/provider/v1/cities/1"
-        );
-        console.log("Cities Response:", res.data);
-        if (res.data.status && Array.isArray(res.data.data)) {
-          setCities(res.data.data);
-        } else {
-          setCities([]);
+    axios
+      .get("https://tabybak.com/api/provider/v1/countries/")
+      .then((res) => {
+        if (res.data.status) {
+          const countriesData = Array.isArray(res.data.data)
+            ? res.data.data
+            : res.data.data?.data || [];
+
+          setCountries(countriesData);
         }
-      } catch (error) {
-        console.error("Failed to fetch cities:", error);
-        setCities([]);
-      }
-    };
-    fetchCities();
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  // ✅ fetch cities when country changes
+  useEffect(() => {
+    if (!selectedCountry) return;
+
+    axios
+      .get(
+        `https://tabybak.com/api/provider/v1/cities/${selectedCountry}`
+      )
+      .then((res) => {
+        if (res.data.status) {
+          const citiesData = Array.isArray(res.data.data)
+            ? res.data.data
+            : res.data.data?.data || [];
+
+          setCities(citiesData);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [selectedCountry]);
 
   const validateForm = () => {
     const nameRegex = /^[a-zA-Z\s]{3,}$/;
@@ -58,13 +79,24 @@ const Booking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (validateForm()) {
+
+      const countryObj = countries.find(
+        (c) => Number(c.id) === Number(selectedCountry)
+      );
+
+      const cityObj = cities.find(
+        (c) => Number(c.id) === Number(selectedCity)
+      );
+
       navigate("/DetailsPage", {
         state: {
           ...formData,
           department: selectedDepartment,
           doctor: selectedDoctor,
-          city: selectedCity,
+          country: countryObj?.name || selectedCountry,
+          city: cityObj?.name || selectedCity,
         },
       });
     }
@@ -81,9 +113,54 @@ const Booking = () => {
         <form onSubmit={handleSubmit}>
           <div className={`booking-grid ${isRTL ? "rtl" : ""}`}>
 
-            {/* SELECT SIDE */}
             <div className="booking-selects">
 
+              {/* COUNTRIES */}
+              <div className="form-group custom-dropdown">
+                <Dropdown onSelect={(e) => setSelectedCountry(e)}>
+                  <Dropdown.Toggle variant="light">
+                    {selectedCountry
+                      ? countries.find(c => c.id == selectedCountry)?.name
+                      : t("selectCountry")}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {countries.map((country) => (
+                      <Dropdown.Item
+                        key={country.id}
+                        eventKey={country.id}
+                      >
+                        {country.name}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+              {/* CITIES */}
+              <div className="form-group custom-dropdown">
+                <Dropdown
+                  onSelect={(e) => setSelectedCity(e)}
+                  disabled={!selectedCountry}
+                >
+                  <Dropdown.Toggle variant="light">
+                    {selectedCity
+                      ? cities.find(c => c.id == selectedCity)?.name
+                      : t("selectCity")}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {cities.map((city) => (
+                      <Dropdown.Item
+                        key={city.id}
+                        eventKey={city.id}
+                      >
+                        {city.name}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+              {/* باقي dropdowns زي ما هم */}
               <div className="form-group custom-dropdown">
                 <Dropdown onSelect={(e) => setSelectedDepartment(e)}>
                   <Dropdown.Toggle variant="light">
@@ -114,24 +191,9 @@ const Booking = () => {
                 </Dropdown>
               </div>
 
-              <div className="form-group custom-dropdown">
-                <Dropdown onSelect={(e) => setSelectedCity(e)}>
-                  <Dropdown.Toggle variant="light">
-                    {selectedCity || t("selectCity")}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    {cities.map((city) => (
-                      <Dropdown.Item key={city.id} eventKey={city.name}>
-                        {city.name}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-
             </div>
 
-            {/* INPUT SIDE */}
+            {/* INPUT SIDE زي ما هو بدون تغيير */}
             <div className="booking-inputs">
 
               <div className="form-group input_div">
@@ -181,7 +243,6 @@ const Booking = () => {
             </div>
           </div>
 
-          {/* BUTTON FULL WIDTH */}
           <button
             type="submit"
             className="btn btn-secondary btn_secondary btn-lg booking-btn"

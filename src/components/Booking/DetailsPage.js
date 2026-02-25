@@ -6,7 +6,7 @@ import "./Appointment.css";
 
 const Details = () => {
   const location = useLocation();
-  const { department, doctor, name, phone, date } = location.state || {};
+  const { department, doctor, name, phone, date, country, city } = location.state || {};
 
   return (
     <>
@@ -17,6 +17,15 @@ const Details = () => {
           <div className="table-responsive">
             <table className="table table-bordered">
               <tbody>
+                <tr>
+                  <th scope="row">Country</th>
+                  <td>{country || "N/A"}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">City</th>
+                  <td>{city || "N/A"}</td>
+                </tr>
                 <tr>
                   <th scope="row">Department</th>
                   <td>{department || "N/A"}</td>
