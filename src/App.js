@@ -24,6 +24,9 @@ import DetailsPage from './components/Booking/DetailsPage';
 import ServicesDetails from './pages/ServicesDetails';
 import SearchBar from './components/ModealSearch/ModealSearch';
 import Layouts from './components/Layout/Layouts';
+import DashboardLayout from "./components/dashboard/DashboardLayout";
+import Dashboard from "./pages/Dashboard";
+import ProfileDash from "./pages/profileDash";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -40,6 +43,19 @@ function App() {
           {/* Redirect */}
           <Route path="/" element={<Navigate to="/home" />} />
 
+          {/*Dashboard Protected */}
+
+          <Route
+            path="/dashboard/*"
+            element={
+              localStorage.getItem("token")
+                ? <DashboardLayout />
+                : <Navigate to="/Login" replace />
+            }
+          >
+            <Route index element={<Dashboard />} />
+            <Route path="profile" element={<ProfileDash />} />
+          </Route>
           {/* Layout Wrapper */}
           <Route element={<Layouts />}>
 
@@ -58,8 +74,8 @@ function App() {
             <Route path="/servicesDetails/:serviceType" element={<ServicesDetails />} />
             <Route path="/Register" element={<AuthPage />} />
             <Route path="/Login" element={<AuthPage />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/profile" element={<Profile />} />
 
           </Route>
 

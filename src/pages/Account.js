@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { successAlert, errorAlert } from "../alerts";
 import {
   getProfileApi,
   updateProfileApi,
@@ -14,6 +15,8 @@ import {
   faSave,
   faLock,
   faTimes,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Account.css";
 
@@ -27,9 +30,15 @@ const Account = () => {
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passwordData, setPasswordData] = useState({
-    old_password: "",
+    current_password: "",
     password: "",
     password_confirmation: "",
+  });
+
+  const [showPassword, setShowPassword] = useState({
+    old: false,
+    new: false,
+    confirm: false,
   });
 
   const [passwordErrors, setPasswordErrors] = useState({});
@@ -85,9 +94,9 @@ const Account = () => {
 
     try {
       await updateProfileApi(formData);
-      alert("Profile updated successfully");
+      successAlert(t("Profile updated successfully"));
     } catch (err) {
-      alert("Error updating profile");
+      errorAlert(t("Error updating profile"));
     }
   };
 
@@ -109,7 +118,7 @@ const Account = () => {
     try {
       await changePasswordApi(passwordData);
 
-      alert("Password changed successfully");
+      successAlert(t("Profile updated successfully"));
       setShowPasswordModal(false);
       setPasswordData({
         old_password: "",
@@ -120,7 +129,7 @@ const Account = () => {
       if (err.response?.data?.errors) {
         setPasswordErrors(err.response.data.errors);
       } else {
-        alert("Error changing password");
+        errorAlert(t("Error updating profile"));
       }
     } finally {
       setPasswordLoading(false);
@@ -184,7 +193,7 @@ const Account = () => {
 
                 <button type="submit" className="btn-save">
                   <FontAwesomeIcon icon={faSave} className="me-2" />
-                  Save Changes
+                  {t("Save Changes")}
                 </button>
               </form>
 
@@ -194,7 +203,7 @@ const Account = () => {
                 onClick={() => setShowPasswordModal(true)}
               >
                 <FontAwesomeIcon icon={faLock} className="me-2" />
-                Change Password
+                {t("Change Password")}
               </button>
             </div>
           </div>
@@ -205,7 +214,7 @@ const Account = () => {
           <div className="password-modal">
             <div className="password-box">
               <div className="modal-header">
-                <h4>Change Password</h4>
+                <h4>{t("Change Password")}</h4>
                 <FontAwesomeIcon
                   icon={faTimes}
                   className="close-icon"
@@ -214,50 +223,89 @@ const Account = () => {
               </div>
 
               <form onSubmit={handlePasswordChange}>
-                <input
-                  type="password"
-                  placeholder="Old Password"
-                  className="form-control mb-2"
-                  value={passwordData.old_password}
-                  onChange={(e) =>
-                    setPasswordData({
-                      ...passwordData,
-                      old_password: e.target.value,
-                    })
-                  }
-                />
+                {/* Old Password */}
+                <div className="password-input">
+                  <input
+                    type={showPassword.old ? "text" : "password"}
+                    placeholder={t("Current Password")}
+                    className="form-control mb-2"
+                    value={passwordData.current_password}
+                    onChange={(e) =>
+                      setPasswordData({
+                        ...passwordData,
+                        current_password: e.target.value,
+                      })
+                    }
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword.old ? faEyeSlash : faEye}
+                    className="toggle-eye"
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        old: !showPassword.old,
+                      })
+                    }
+                  />
+                </div>
                 <small className="error-text">
-                  {passwordErrors.old_password}
+                  {passwordErrors.current_password}
                 </small>
 
-                <input
-                  type="password"
-                  placeholder="New Password"
-                  className="form-control mb-2"
-                  value={passwordData.password}
-                  onChange={(e) =>
-                    setPasswordData({
-                      ...passwordData,
-                      password: e.target.value,
-                    })
-                  }
-                />
+                {/* New Password */}
+                <div className="password-input">
+                  <input
+                    type={showPassword.new ? "text" : "password"}
+                    placeholder={t("Change Password")}
+                    className="form-control mb-2"
+                    value={passwordData.password}
+                    onChange={(e) =>
+                      setPasswordData({
+                        ...passwordData,
+                        password: e.target.value,
+                      })
+                    }
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword.new ? faEyeSlash : faEye}
+                    className="toggle-eye"
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        new: !showPassword.new,
+                      })
+                    }
+                  />
+                </div>
                 <small className="error-text">
                   {passwordErrors.password}
                 </small>
 
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  className="form-control mb-3"
-                  value={passwordData.password_confirmation}
-                  onChange={(e) =>
-                    setPasswordData({
-                      ...passwordData,
-                      password_confirmation: e.target.value,
-                    })
-                  }
-                />
+                {/* Confirm Password */}
+                <div className="password-input">
+                  <input
+                    type={showPassword.confirm ? "text" : "password"}
+                    placeholder={t("Confirm Password")}
+                    className="form-control mb-3"
+                    value={passwordData.password_confirmation}
+                    onChange={(e) =>
+                      setPasswordData({
+                        ...passwordData,
+                        password_confirmation: e.target.value,
+                      })
+                    }
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword.confirm ? faEyeSlash : faEye}
+                    className="toggle-eye"
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        confirm: !showPassword.confirm,
+                      })
+                    }
+                  />
+                </div>
                 <small className="error-text">
                   {passwordErrors.password_confirmation}
                 </small>

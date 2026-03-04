@@ -113,6 +113,55 @@ const Booking = () => {
         <form onSubmit={handleSubmit}>
           <div className={`booking-grid ${isRTL ? "rtl" : ""}`}>
 
+            {/* INPUT SIDE زي ما هو بدون تغيير */}
+            <div className="booking-inputs">
+
+              <div className="form-group input_div">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={t("yourName")}
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                />
+                {errors.name && (
+                  <small className="text-danger">{errors.name}</small>
+                )}
+              </div>
+
+              <div className="form-group input_div">
+                <input
+                  type="tel"
+                  className="form-control"
+                  placeholder={t("phoneNumbers")}
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  required
+                />
+                {errors.phone && (
+                  <small className="text-danger">{errors.phone}</small>
+                )}
+              </div>
+
+              <div className="form-group input_div">
+                <input
+                  type="date"
+                  className="form-control control_date"
+                  value={formData.date}
+                  onChange={(e) =>
+                    setFormData({ ...formData, date: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+            </div>
+
             <div className="booking-selects">
 
               {/* COUNTRIES */}
@@ -189,55 +238,6 @@ const Booking = () => {
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-              </div>
-
-            </div>
-
-            {/* INPUT SIDE زي ما هو بدون تغيير */}
-            <div className="booking-inputs">
-
-              <div className="form-group input_div">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder={t("yourName")}
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  required
-                />
-                {errors.name && (
-                  <small className="text-danger">{errors.name}</small>
-                )}
-              </div>
-
-              <div className="form-group input_div">
-                <input
-                  type="tel"
-                  className="form-control"
-                  placeholder={t("phoneNumbers")}
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  required
-                />
-                {errors.phone && (
-                  <small className="text-danger">{errors.phone}</small>
-                )}
-              </div>
-
-              <div className="form-group input_div">
-                <input
-                  type="date"
-                  className="form-control control_date"
-                  value={formData.date}
-                  onChange={(e) =>
-                    setFormData({ ...formData, date: e.target.value })
-                  }
-                  required
-                />
               </div>
 
             </div>

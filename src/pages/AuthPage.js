@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { successAlert, errorAlert } from "../alerts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -36,7 +37,6 @@ const AuthPage = () => {
   const [pinCode, setPinCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -118,14 +118,14 @@ const AuthPage = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("isLoggedIn", "true");
         window.dispatchEvent(new Event("authChange"));
-        setSuccessMessage("Login Successful ✅");
+        successAlert(t("loginSuccess") || "Login Successful ✅");
 
         setTimeout(() => {
           navigate("/");
         }, 1500);
       }
-    } catch {
-      alert(t("loginFail"));
+    } catch (err) {
+      errorAlert(t("loginFail") || "Login Failed ❌");
     }
 
     setLoading(false);
@@ -137,7 +137,7 @@ const AuthPage = () => {
     setLoading(true);
 
     if (registerData.password !== registerData.password_confirmation) {
-      alert(t("passwordMismatch"));
+      errorAlert(t("passwordMismatch") || "Passwords do not match ❌");
       setLoading(false);
       return;
     }
@@ -151,13 +151,23 @@ const AuthPage = () => {
       const res = await registerApi(formData);
 
       if (res.data.status) {
-        setSuccessMessage("Account Created Successfully 🎉");
+        const token = res?.data?.token || res?.data?.data?.token;
+
+        if (token) {
+          localStorage.setItem("token", token);
+          localStorage.setItem("isLoggedIn", "true");
+          window.dispatchEvent(new Event("authChange"));
+        }
+
+        successAlert("Account Created Successfully 🎉");
+
         setTimeout(() => {
-          navigate("/login");
-        }, 1500);
+          navigate("/dashboard");
+        }, 1000);
       }
-    } catch {
-      alert(t("registerFail"));
+
+    } catch (err) {
+      errorAlert(t("registerFail") || "Registration Failed ❌");
     }
 
     setLoading(false);
@@ -172,11 +182,11 @@ const AuthPage = () => {
       const res = await forgetPasswordApi(emailForReset);
 
       if (res.data.status) {
-        setSuccessMessage("Pin Code Sent To Your Email ✅");
+        successAlert("Pin Code Sent To Your Email ✅");
         setMode("reset");
       }
-    } catch {
-      alert("Failed to send pin code");
+    } catch (err) {
+      errorAlert(t("failedToSendPinCode") || "Failed to send Pin Code ❌");
     }
 
     setLoading(false);
@@ -196,11 +206,11 @@ const AuthPage = () => {
       });
 
       if (res.data.status) {
-        setSuccessMessage("Password Reset Successfully 🎉");
+        successAlert("Password Reset Successfully 🎉");
         setMode("login");
       }
-    } catch {
-      alert("Reset Failed");
+    } catch (err) {
+      errorAlert(t("resetPasswordFailed") || "Reset Failed ❌");
     }
 
     setLoading(false);
@@ -209,7 +219,6 @@ const AuthPage = () => {
   return (
     <div className="auth-wrapper icon_auth">
       <div className={`auth-card ${mode === "register" ? "flip" : ""}`}>
-
         {/* LOGIN */}
         <div className="auth-face auth-front">
           <div className="form-side">
@@ -256,7 +265,8 @@ const AuthPage = () => {
                     <FontAwesomeIcon icon={faArrowRight} />
                   </span>
                 </p>
-              </form>)}
+              </form>
+            )}
             {mode === "forget" && (
               <form onSubmit={handleForgetPassword}>
                 <h2>{t("forgetPassword")}</h2>
@@ -265,7 +275,6 @@ const AuthPage = () => {
                   icon={faEnvelope}
                   type="email"
                   placeholder={t("email")}
-
                   onChange={(e) => setEmailForReset(e.target.value)}
                 />
 
@@ -349,7 +358,6 @@ const AuthPage = () => {
                 }
               />
 
-              {/* Country */}
               <Select
                 icon={faGlobe}
                 value={registerData.country_id}
@@ -369,7 +377,6 @@ const AuthPage = () => {
                 ))}
               </Select>
 
-              {/* City */}
               <Select
                 icon={faCity}
                 value={registerData.city_id}
@@ -387,7 +394,6 @@ const AuthPage = () => {
                   </option>
                 ))}
               </Select>
-
 
               <Input
                 icon={faLock}
@@ -424,12 +430,6 @@ const AuthPage = () => {
           </div>
         </div>
       </div>
-
-      {successMessage && (
-        <div className="success-alert">
-          {successMessage}
-        </div>
-      )}
     </div>
   );
 };

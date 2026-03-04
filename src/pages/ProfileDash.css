@@ -1,0 +1,73 @@
+/* ================== DOCTOR FORM ================== */
+
+.doctor-form-wrapper {
+  max-width: 700px;
+  margin: 30px auto;
+  background: #004444;
+  padding: 30px;
+  border-radius: 12px;
+  color: white;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #008d8d;
+}
+
+.doctor-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #008d8d;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #005656;
+  outline: none;
+  font-size: 14px;
+  background: white;
+  color: #004444;
+  transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #017a7a;
+  box-shadow: 0 0 5px #017a7a55;
+}
+
+.submit-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #008d8d;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: #017a7a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .doctor-form-wrapper {
+    padding: 20px;
+    margin: 15px;
+  }
+}

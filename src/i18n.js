@@ -92,7 +92,15 @@ const resources = {
       unknown: "Unknown",
       account: "Account",
       logout: "Logout",
+      "loginFail": "Login failed ❌",
+      passwordMismatch: "Password and confirm password do not match ❌",
+      failedToSendPinCode: "Failed to send pin code",
+      resetPasswordFailed: "Failed to reset password",
       // ================= ACCOUNT PAGE =================
+      "Confirm Password": "Confirm Password",
+      "Current Password": "Current Password",
+      "Change Password": "Change Password",
+      "Save Changes": "Save Changes",
       "account.title": "Account Settings",
       "account.personalInfo": "Personal Information",
       "account.businessInfo": "Business Information",
@@ -124,7 +132,8 @@ const resources = {
       "account.subscription": "Subscription",
       "account.memberSince": "Member Since",
       "account.lastUpdate": "Last Update",
-
+      "Profile updated successfully": "Profile updated successfully",
+      "Error updating profile": "Error updating profile",
       // Status
       statusPending: "Pending",
       statusActive: "Active",
@@ -289,6 +298,10 @@ const resources = {
       loginSuccess: "تم تسجيل الدخول بنجاح ✅",
       loginFail: "فشل تسجيل الدخول ❌",
       noAccount: "ليس لديك حساب؟",
+      passwordMismatch: "كلمة المرور وتأكيد كلمة المرور غير متطابقين ❌",
+      failedToSendPinCode: "فشل في إرسال رمز التحقق",
+      resetPasswordFailed: "فشل في إعادة تعيين كلمة المرور",
+      "loginFail": "فشل تسجيل الدخول ❌",
 
       // Register
       registerTitle: "تسجيل جديد",
@@ -334,6 +347,12 @@ const resources = {
       logout: "تسجيل الخروج",
 
       // ================= ACCOUNT PAGE =================
+      "Error updating profile": "خطأ في تحديث الملف الشخصي",
+      "Profile updated successfully": "تم تحديث الملف الشخصي بنجاح",
+      "Confirm Password": "تأكيد كلمة المرور",
+      "Current Password": "كلمة المرور الحالية",
+      "Change Password": "تغيير كلمة المرور",
+      "Save Changes": "حفظ التغييرات",
       "account.title": "إعدادات الحساب",
       "account.personalInfo": "المعلومات الشخصية",
       "account.businessInfo": "المعلومات التجارية",
